@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wadokumanagementapi</title>
+  <title>Das große Lexikon des Buddhismus</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -11,7 +11,7 @@
 <div class="navbar navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "WaDokuManagementAPI", root_path, :class => 'brand' %>
+      <%= link_to "Das große Lexikon des Buddhismus", root_path, :class => 'brand' %>
       <ul class="nav">
         <% if current_user.role == "admin" %>
           <li><%= link_to "Users", users_path, :method => :get %></li>
