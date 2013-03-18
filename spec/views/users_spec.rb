@@ -26,7 +26,7 @@ describe "users management api" do
     end
   end
 
-  describe "admin can view the users list and change users' status and delete user" do
+  describe "admin can view the users list and change users' role and delete user" do
     before(:each) do
       @user = FactoryGirl.create(:user)
       admin = FactoryGirl.create(:admin)
@@ -44,13 +44,13 @@ describe "users management api" do
       first(:link, 'Show').click
       page.should have_content("Status")
     end
-    it "can change user's status" do
+    it "can change user's role" do
       visit users_path
       first(:link, 'Show').click
-      select "editor", :from => "user_status"
+      select "editor", :from => "user_role"
       find("#update_user").click
       @user.reload
-      @user.status.should == "editor"
+      @user.role.should == "editor"
     end
     it "should not show users list to common user" do
       click_link "abmelden"
