@@ -1,0 +1,65 @@
+<h1>Listing entries</h1>
+
+<table>
+  <tr>
+    <th>Verfasser</th>
+    <th>Kennzahl</th>
+    <th>Spaltenzahl</th>
+    <th>Japanische umschrift</th>
+    <th>Kanji</th>
+    <th>Pali</th>
+    <th>Sanskrit</th>
+    <th>Chinesisch</th>
+    <th>Tibetisch</th>
+    <th>Koreanisch</th>
+    <th>Weitere sprachen</th>
+    <th>Alternative japanische lesungen</th>
+    <th>Schreibvarianten</th>
+    <th>Deutsche uebersetzung</th>
+    <th>Lemma art</th>
+    <th>Jahreszahlen</th>
+    <th>Uebersetzung</th>
+    <th>Quellen</th>
+    <th>Literatur</th>
+    <th>Eigene ergaenzungen</th>
+    <th>Quellen ergaenzungen</th>
+    <th>Literatur ergaenzungen</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @entries.each do |entry| %>
+  <tr>
+    <td><%= entry.verfasser %></td>
+    <td><%= entry.kennzahl %></td>
+    <td><%= entry.spaltenzahl %></td>
+    <td><%= entry.japanische_umschrift %></td>
+    <td><%= entry.kanji %></td>
+    <td><%= entry.pali %></td>
+    <td><%= entry.sanskrit %></td>
+    <td><%= entry.chinesisch %></td>
+    <td><%= entry.tibetisch %></td>
+    <td><%= entry.koreanisch %></td>
+    <td><%= entry.weitere_sprachen %></td>
+    <td><%= entry.alternative_japanische_lesungen %></td>
+    <td><%= entry.schreibvarianten %></td>
+    <td><%= entry.deutsche_uebersetzung %></td>
+    <td><%= entry.lemma_art %></td>
+    <td><%= entry.jahreszahlen %></td>
+    <td><%= entry.uebersetzung %></td>
+    <td><%= entry.quellen %></td>
+    <td><%= entry.literatur %></td>
+    <td><%= entry.eigene_ergaenzungen %></td>
+    <td><%= entry.quellen_ergaenzungen %></td>
+    <td><%= entry.literatur_ergaenzungen %></td>
+    <td><%= link_to 'Show', entry %></td>
+    <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+    <td><%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Entry', new_entry_path %>

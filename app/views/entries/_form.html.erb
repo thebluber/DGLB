@@ -1,0 +1,105 @@
+<%= form_for(@entry) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :verfasser %><br />
+    <%= f.text_field :verfasser %>
+  </div>
+  <div class="field">
+    <%= f.label :kennzahl %><br />
+    <%= f.text_field :kennzahl %>
+  </div>
+  <div class="field">
+    <%= f.label :spaltenzahl %><br />
+    <%= f.text_field :spaltenzahl %>
+  </div>
+  <div class="field">
+    <%= f.label :japanische_umschrift %><br />
+    <%= f.text_field :japanische_umschrift %>
+  </div>
+  <div class="field">
+    <%= f.label :kanji %><br />
+    <%= f.text_field :kanji %>
+  </div>
+  <div class="field">
+    <%= f.label :pali %><br />
+    <%= f.text_field :pali %>
+  </div>
+  <div class="field">
+    <%= f.label :sanskrit %><br />
+    <%= f.text_field :sanskrit %>
+  </div>
+  <div class="field">
+    <%= f.label :chinesisch %><br />
+    <%= f.text_field :chinesisch %>
+  </div>
+  <div class="field">
+    <%= f.label :tibetisch %><br />
+    <%= f.text_field :tibetisch %>
+  </div>
+  <div class="field">
+    <%= f.label :koreanisch %><br />
+    <%= f.text_field :koreanisch %>
+  </div>
+  <div class="field">
+    <%= f.label :weitere_sprachen %><br />
+    <%= f.text_field :weitere_sprachen %>
+  </div>
+  <div class="field">
+    <%= f.label :alternative_japanische_lesungen %><br />
+    <%= f.text_field :alternative_japanische_lesungen %>
+  </div>
+  <div class="field">
+    <%= f.label :schreibvarianten %><br />
+    <%= f.text_field :schreibvarianten %>
+  </div>
+  <div class="field">
+    <%= f.label :deutsche_uebersetzung %><br />
+    <%= f.text_field :deutsche_uebersetzung %>
+  </div>
+  <div class="field">
+    <%= f.label :lemma_art %><br />
+    <%= f.text_field :lemma_art %>
+  </div>
+  <div class="field">
+    <%= f.label :jahreszahlen %><br />
+    <%= f.text_field :jahreszahlen %>
+  </div>
+  <div class="field">
+    <%= f.label :uebersetzung %><br />
+    <%= f.text_area :uebersetzung %>
+  </div>
+  <div class="field">
+    <%= f.label :quellen %><br />
+    <%= f.text_area :quellen %>
+  </div>
+  <div class="field">
+    <%= f.label :literatur %><br />
+    <%= f.text_area :literatur %>
+  </div>
+  <div class="field">
+    <%= f.label :eigene_ergaenzungen %><br />
+    <%= f.text_area :eigene_ergaenzungen %>
+  </div>
+  <div class="field">
+    <%= f.label :quellen_ergaenzungen %><br />
+    <%= f.text_area :quellen_ergaenzungen %>
+  </div>
+  <div class="field">
+    <%= f.label :literatur_ergaenzungen %><br />
+    <%= f.text_area :literatur_ergaenzungen %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

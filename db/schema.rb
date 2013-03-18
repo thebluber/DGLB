@@ -11,7 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312112753) do
+ActiveRecord::Schema.define(:version => 20130318153836) do
+
+  create_table "entries", :force => true do |t|
+    t.string   "verfasser"
+    t.string   "kennzahl"
+    t.string   "spaltenzahl"
+    t.string   "japanische_umschrift"
+    t.string   "kanji"
+    t.string   "pali"
+    t.string   "sanskrit"
+    t.string   "chinesisch"
+    t.string   "tibetisch"
+    t.string   "koreanisch"
+    t.string   "weitere_sprachen"
+    t.string   "alternative_japanische_lesungen"
+    t.string   "schreibvarianten"
+    t.string   "deutsche_uebersetzung"
+    t.string   "lemma_art"
+    t.string   "jahreszahlen"
+    t.text     "uebersetzung"
+    t.text     "quellen"
+    t.text     "literatur"
+    t.text     "eigene_ergaenzungen"
+    t.text     "quellen_ergaenzungen"
+    t.text     "literatur_ergaenzungen"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "user_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

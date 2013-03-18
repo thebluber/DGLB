@@ -1,4 +1,7 @@
 DGLB::Application.routes.draw do
+  resources :entries
+
+
   root :to => "home#index"
   devise_for :users
   resources :users, :except => :new
