@@ -41,6 +41,8 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(params[:entry])
+    @entry.user = current_user
+    @entry.verfasser = current_user.name
 
     respond_to do |format|
       if @entry.save

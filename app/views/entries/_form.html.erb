@@ -13,7 +13,11 @@
 
   <div class="field">
     <%= f.label :verfasser %><br />
-    <%= f.text_field :verfasser %>
+    <% if @entry.user != nil %>
+      <%= @entry.user.name %>
+    <% else %>
+      <%= current_user.name %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :kennzahl %><br />
@@ -69,7 +73,11 @@
   </div>
   <div class="field">
     <%= f.label :lemma_art %><br />
-    <%= f.text_field :lemma_art %>
+    <% if @entry %>
+      <%= f.select(:lemma_art, options_for_select([["Person", "Person"], ["Tempel", "Tempel"], ["Werk", "Werk"], ["Fachtermini", "Fachtermini"], ["Geographische Bezeichnung", "Geographische Bezeichnung"], ["Ereignis", "Ereignis"]], @entry.lemma_art)) %> 
+    <% else %>
+      <%= f.select(:lemma_art, options_for_select([["Person", "Person"], ["Tempel", "Tempel"], ["Werk", "Werk"], ["Fachtermini", "Fachtermini"], ["Geographische Bezeichnung", "Geographische Bezeichnung"], ["Ereignis", "Ereignis"]])) %> 
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :jahreszahlen %><br />

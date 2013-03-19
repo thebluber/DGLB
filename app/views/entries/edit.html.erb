@@ -1,6 +1,8 @@
 <h1>Editing entry</h1>
 
-<%= render 'form' %>
+<%= form_for @entry  do |f| %>
+  <%= render 'form' %>
+<% end %>
 
 <%= link_to 'Show', @entry %> |
 <%= link_to 'Back', entries_path %>

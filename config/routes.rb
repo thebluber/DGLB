@@ -10,6 +10,9 @@ DGLB::Application.routes.draw do
   resources :users, :except => :new
   match "users/:id/update_role" => "users#update_role", :as => "update_user_role", :via => :put       
 
+  resources :entries
+  resources :comments
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
