@@ -1,8 +1,10 @@
+<div class="span8 offset2">
 <h1>Editing entry</h1>
 
-<%= form_for @entry  do |f| %>
-  <%= render 'form' %>
+<%= form_for @entry, :html => {:class => "form-horizontal"} do |f| %>
+    <%= render :partial => 'entries/form', :locals => {:f => f}%>
 <% end %>
 
 <%= link_to 'Show', @entry %> |
 <%= link_to 'Back', entries_path %>
+</div>
