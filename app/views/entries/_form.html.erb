@@ -134,8 +134,11 @@
   <div class="control-group">
     <%= f.label :uebersetzung, :class => "control-label" %>
     <div class="controls">
-      <% hidden_field :entry, :uebersetzung, :value => params[:uebersetzung] %>
-      <div contentEditable="true" class="editable uneditable-input">
+      <%= f.hidden_field :uebersetzung %>
+      <div contentEditable="true" class="editable uneditable-input" id="uebersetzung_editable">
+        <% if @entry %> 
+          <%= @entry.uebersetzung %>
+        <% end %>
       </div>
     </div>
   </div>
