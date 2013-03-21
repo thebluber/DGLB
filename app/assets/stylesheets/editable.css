@@ -6,3 +6,32 @@
   line-height: 20px;
   color: #555555;
 }
+
+.fachtermini {
+  color: blue;
+  font-style: italic;
+
+}
+
+.werktitel_original {
+  font-style: italic;
+}
+
+.werktitel_fremdspr {
+  color: purple;
+  font-style: italic
+}
+
+.sonstiges {
+  color: green;
+  font-weight: bold;
+}
+
+.eigennamen {
+  color: red;
+}
+
+.fragliche_stellen {
+  text-decoration: underline;
+}
+
