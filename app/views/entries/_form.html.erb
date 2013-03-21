@@ -134,7 +134,9 @@
   <div class="control-group">
     <%= f.label :uebersetzung, :class => "control-label" %>
     <div class="controls">
-      <%= f.text_area :uebersetzung, :cols => "20" %>
+      <% hidden_field :entry, :uebersetzung, :value => params[:uebersetzung] %>
+      <div contentEditable="true" class="editable uneditable-input">
+      </div>
     </div>
   </div>
 

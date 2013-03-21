@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  *= require bootstrap
+ *= require editable
  */
 .field {
   vertical-align: middle;
@@ -21,3 +22,5 @@
   line-height: 20px;
   height: 20px;
 }
+
+
