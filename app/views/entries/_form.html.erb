@@ -134,20 +134,7 @@
   <div class="control-group">
     <%= f.label :uebersetzung, :class => "control-label" %>
     <div class="controls">
-      <div class="uebersetzung_buttons">
-        <span class="btn fachtermini" id="b1">Fachtermini</span>
-        <span class="btn werktitel_original" id="b2">Werktitel(original)</span>
-        <span class="btn werktitel_fremdspr" id="b3">Werktitel(fremdspr.)</span>
-        <span class="btn sonstiges" id="b4">Sonstiges</span>
-        <span class="btn eigennamen" id="b5">Eigennamen</span>
-        <span class="btn fragliche_stellen" id="b6">Fragliche Stellen</span>
-      </div>
-      <%= f.hidden_field :uebersetzung %>
-      <div contentEditable="true" class="editable uneditable-input" id="uebersetzung_editable">
-        <% if @entry %> 
-          <%= @entry.uebersetzung %>
-        <% end %>
-      </div>
+      <%= f.cktext_area :uebersetzung, :ckeditor => {:uiColor => "#AADC6E", :toolbar => "MyToolbar"} %>
     </div>
   </div>
 

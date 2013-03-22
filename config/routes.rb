@@ -1,4 +1,5 @@
 DGLB::Application.routes.draw do
+
   resources :comments
 
 

@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem "ckeditor"
 
 gem 'devise'
 gem "rspec-rails", :group => [:test, :development]
