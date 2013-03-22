@@ -38,3 +38,19 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 .cke_button__sonstiges_icon{
   display:none;
 }
+.cke_button__eigennamen_label{
+  display:inline-block;
+  color: red;
+  font-size:15px;
+}
+.cke_button__eigennamen_icon{
+  display:none;
+}
+.stellen_label{
+  display:inline-block;
+  font-size:15px;
+  text-decoration: underline;
+}
+.stellen_icon{
+  display:none;
+}

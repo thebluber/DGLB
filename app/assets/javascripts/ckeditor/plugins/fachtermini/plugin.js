@@ -1,28 +1,12 @@
 CKEDITOR.plugins.add( 'fachtermini',
 {
   init: function( editor ){
-    editor.addCommand( 'markFachtermini',
-      {
-        exec : function( editor )
-        {
-          var selection = editor.getSelection();
-          var start_el = selection.getStartElement();
-          if (start_el.hasClass("fachtermini")){
-            if (start_el.getText() == selection.getSelectedText()){
-              start_el.removeClass("fachtermini")
-            } else {
-              editor.insertHtml("<span>" + selection.getSelectedText() + "</span>");
-            }
-          } else {
-            if (start_el.getText() == selection.getSelectedText() && start_el.$.tagName == "SPAN"){
-              start_el.addClass("fachtermini")
-            } else {
-              editor.insertHtml( "<span class='fachtermini'>" + selection.getSelectedText() + "</span>" );
-            }
-          }
-
-        }
-      });
+    var style = new CKEDITOR.style({element: 'span', attributes: {'class': 'fachtermini'}});
+    // Listen to contextual style activation.
+    editor.attachStyleStateChange( style, function( state ) {
+      !editor.readOnly && editor.getCommand( 'markFachtermini' ).setState( state );
+    });
+    editor.addCommand( 'markFachtermini', new CKEDITOR.styleCommand( style ));
     editor.ui.addButton( 'Fachtermini',
       {
         label: 'Fachtermini',
