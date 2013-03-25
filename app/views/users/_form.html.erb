@@ -1,29 +1,27 @@
 <%= form_for @user, :method => :put do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+  <fieldset>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h2 class="label label-info">
+      <%= @user.role.capitalize %>
+    </h2>
+    <br />
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => "input-medium" %>
+      <%= f.label :email %>
+      <%= f.text_field :email, :class => "input-medium" %>
+    <div class="actions">
+      <%= f.submit "Update user", :id => "update_user"%>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br />
-    <%= @user.role %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Update user", :id => "update_user"%>
-  </div>
+  </fieldset>
 <% end %>

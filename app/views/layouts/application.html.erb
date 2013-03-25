@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
       <%= link_to "Das große Lexikon des Buddhismus", root_path, :class => 'brand' %>
@@ -17,6 +17,13 @@
           <li><%= link_to "Users", users_path, :method => :get %></li>
         <% end %>
           <li><%= link_to "Konto", edit_user_path(current_user), :method => :get %></li>
+          <li class="dropdown">
+            <a class='dropdown-toggle' data-toggle='dropdown' href='#'>Entries</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+              <li><%= link_to "All entries", entries_path, :method => :get %></li>
+              <li><%= link_to "My entries", users_entries_path(current_user), :method => :get %></li>
+            </ul>
+          </li>
       </ul>
 
       <ul class="nav pull-right">
@@ -28,8 +35,11 @@
 
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span12">
-      <%= yield %>
+    <div class="span3 sidebar">
+      <%= yield :sidebar%>
+    </div>
+    <div class="span9">
+      <%= yield :content%>
     </div>
   </div>
 </div>

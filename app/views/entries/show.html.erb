@@ -1,115 +1,117 @@
-<p id="notice"><%= notice %></p>
+<% content_for :content do %>
+  <p id="notice"><%= notice %></p>
 
-<p>
+  <p>
   <b>Verfasser:</b>
   <%= @entry.verfasser %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Kennzahl:</b>
   <%= @entry.kennzahl %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Spaltenzahl:</b>
   <%= @entry.spaltenzahl %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Japanische umschrift:</b>
   <%= @entry.japanische_umschrift %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Kanji:</b>
   <%= @entry.kanji %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Pali:</b>
   <%= @entry.pali %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Sanskrit:</b>
   <%= @entry.sanskrit %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Chinesisch:</b>
   <%= @entry.chinesisch %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Tibetisch:</b>
   <%= @entry.tibetisch %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Koreanisch:</b>
   <%= @entry.koreanisch %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Weitere sprachen:</b>
   <%= @entry.weitere_sprachen %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Alternative japanische lesungen:</b>
   <%= @entry.alternative_japanische_lesungen %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Schreibvarianten:</b>
   <%= @entry.schreibvarianten %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Deutsche uebersetzung:</b>
   <%= @entry.deutsche_uebersetzung %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Lemma art:</b>
   <%= @entry.lemma_art %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Jahreszahlen:</b>
   <%= @entry.jahreszahlen %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Uebersetzung:</b>
   <%= @entry.uebersetzung %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Quellen:</b>
   <%= @entry.quellen %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Literatur:</b>
   <%= @entry.literatur %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Eigene ergaenzungen:</b>
   <%= @entry.eigene_ergaenzungen %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Quellen ergaenzungen:</b>
   <%= @entry.quellen_ergaenzungen %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Literatur ergaenzungen:</b>
   <%= @entry.literatur_ergaenzungen %>
-</p>
+  </p>
 
 
-<%= link_to 'Edit', edit_entry_path(@entry) %> |
-<%= link_to 'Back', entries_path %>
+  <%= link_to 'Edit', edit_entry_path(@entry) %> |
+  <%= link_to 'Back', entries_path %>
+<% end %>

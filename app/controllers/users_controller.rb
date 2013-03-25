@@ -18,6 +18,15 @@ class UsersController < ApplicationController
 
   end
 
+  def entries
+    @entries = current_user.entries
+    respond_to do |format|
+      format.html # users_entries.html.erb
+      format.json { render json: @entries }
+    end
+  end
+
+
   # GET /users/1
   # GET /users/1.json
   def show

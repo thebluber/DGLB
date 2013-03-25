@@ -10,6 +10,7 @@ DGLB::Application.routes.draw do
   devise_for :users
   resources :users, :except => :new
   match "users/:id/update_role" => "users#update_role", :as => "update_user_role", :via => :put       
+  match "users/:id/entries" => "users#entries", :as => "users_entries", :via => :get
 
   resources :entries
   resources :comments

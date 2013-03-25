@@ -1,4 +1,9 @@
-<% if flash[:notice] %> 
-  <p><%= flash[:notice] %></p>
+<% content_for :content do %>
+  <% if flash[:notice] %> 
+    <div class="alert alert-notice">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong><%= flash[:notice] %></strong>
+    </div>
+  <% end %>
 <% end %>
 
