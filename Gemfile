@@ -25,6 +25,7 @@ gem "ckeditor"
 
 gem 'devise'
 gem "rspec-rails", :group => [:test, :development]
+gem "paper_trail", "~> 2"
 
 group :development do
   gem 'better_errors'
@@ -48,7 +49,10 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+ group :deployment do
+   gem 'capistrano'
+   gem 'rvm-capistrano'
+ end
 
 # To use debugger
 # gem 'debugger'
