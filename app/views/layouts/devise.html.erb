@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wadokumanagementapi</title>
+  <title>SBDJ</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= yield %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span4 offset4">
+      <%= yield :content%>
+      <% if notice || alert %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      <% end%>
+    </div>
+  </div>
+</div>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
 </body>
 </html>
