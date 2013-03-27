@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /comments
   # GET /comments.json
   def index
@@ -14,11 +15,7 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
     @comment = Comment.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @comment }
-    end
+    redirect_to entry_path(@comment.entry) + "#comments"
   end
 
   # GET /comments/new
@@ -35,6 +32,10 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    if @comment.user != current_user && current_user.role != "admin"
+      flash[:notice] = 'Access denied!'
+      redirect_to entry_path(@comment.entry) + "#comments"
+    end
   end
 
   # POST /comments
@@ -44,7 +45,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to entry_path(@comment.entry) + "#comments", notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
@@ -60,7 +61,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to entry_path(@comment.entry) + "#comments", notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -73,10 +74,11 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     @comment = Comment.find(params[:id])
+    @entry = @comment.entry
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to comments_url }
+      format.html { redirect_to @entry, notice: 'Comment was successfully deleted.'}
       format.json { head :no_content }
     end
   end
