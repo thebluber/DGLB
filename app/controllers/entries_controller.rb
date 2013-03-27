@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
+  before_filter :authenticate_user!
   def index
     @entries = Entry.all
 
@@ -35,6 +36,10 @@ class EntriesController < ApplicationController
   # GET /entries/1/edit
   def edit
     @entry = Entry.find(params[:id])
+    if @entry.user != current_user && current_user.role != "admin"
+      flash[:notice] = "You are not allowed to edit entries of someone else. Write a commet instead."
+      redirect_to :action => 'show' 
+    end
   end
 
   # POST /entries
