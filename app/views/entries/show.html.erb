@@ -1,117 +1,65 @@
 <% content_for :content do %>
-  <p id="notice"><%= notice %></p>
+  <% if flash[:notice] %> 
+    <div class="alert alert-notice">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong><%= flash[:notice] %></strong>
+    </div>
+  <% end %>
 
-  <p>
-  <b>Verfasser:</b>
-  <%= @entry.verfasser %>
-  </p>
+  <dl class="dl">
+    <dt class="label">Verfasser</dt>
+    <dd><%= @entry.verfasser %></dd>
 
-  <p>
-  <b>Kennzahl:</b>
-  <%= @entry.kennzahl %>
-  </p>
+    <dt class="label">Kennzahl</dt>
+    <dd><%= @entry.kennzahl %></dd>
+    <dt class="label">Spaltenzahl</dt>
+    <dd><%= @entry.spaltenzahl %></dd>
+    <dt class="label">Japanische Umschrift</dt>
+    <dd><%= @entry.japanische_umschrift %></dd>
+    <dt class="label">Kanji</dt>
+    <dd><%= @entry.kanji %></dd>
 
-  <p>
-  <b>Spaltenzahl:</b>
-  <%= @entry.spaltenzahl %>
-  </p>
-
-  <p>
-  <b>Japanische umschrift:</b>
-  <%= @entry.japanische_umschrift %>
-  </p>
-
-  <p>
-  <b>Kanji:</b>
-  <%= @entry.kanji %>
-  </p>
-
-  <p>
-  <b>Pali:</b>
-  <%= @entry.pali %>
-  </p>
-
-  <p>
-  <b>Sanskrit:</b>
-  <%= @entry.sanskrit %>
-  </p>
-
-  <p>
-  <b>Chinesisch:</b>
-  <%= @entry.chinesisch %>
-  </p>
-
-  <p>
-  <b>Tibetisch:</b>
-  <%= @entry.tibetisch %>
-  </p>
-
-  <p>
-  <b>Koreanisch:</b>
-  <%= @entry.koreanisch %>
-  </p>
-
-  <p>
-  <b>Weitere sprachen:</b>
-  <%= @entry.weitere_sprachen %>
-  </p>
-
-  <p>
-  <b>Alternative japanische lesungen:</b>
-  <%= @entry.alternative_japanische_lesungen %>
-  </p>
-
-  <p>
-  <b>Schreibvarianten:</b>
-  <%= @entry.schreibvarianten %>
-  </p>
-
-  <p>
-  <b>Deutsche uebersetzung:</b>
-  <%= @entry.deutsche_uebersetzung %>
-  </p>
-
-  <p>
-  <b>Lemma art:</b>
-  <%= @entry.lemma_art %>
-  </p>
-
-  <p>
-  <b>Jahreszahlen:</b>
-  <%= @entry.jahreszahlen %>
-  </p>
-
-  <p>
-  <b>Uebersetzung:</b>
-  <%= @entry.uebersetzung %>
-  </p>
-
-  <p>
-  <b>Quellen:</b>
-  <%= @entry.quellen %>
-  </p>
-
-  <p>
-  <b>Literatur:</b>
-  <%= @entry.literatur %>
-  </p>
-
-  <p>
-  <b>Eigene ergaenzungen:</b>
-  <%= @entry.eigene_ergaenzungen %>
-  </p>
-
-  <p>
-  <b>Quellen ergaenzungen:</b>
-  <%= @entry.quellen_ergaenzungen %>
-  </p>
-
-  <p>
-  <b>Literatur ergaenzungen:</b>
-  <%= @entry.literatur_ergaenzungen %>
-  </p>
+    <dt class="label">Pali</dt>
+    <dd><%= @entry.pali %></dd>
+    <dt class="label">Sanskrit</dt>
+    <dd><%= @entry.sanskrit %></dd>
+    <dt class="label">Chinesisch</dt>
+    <dd><%= @entry.chinesisch %></dd>
 
 
-  <%= link_to 'Edit', edit_entry_path(@entry) %> |
+    <dt class="label">Tibetisch</dt>
+    <dd><%= @entry.tibetisch %></dd>
+
+    <dt class="label">Koreanisch</dt>
+    <dd><%= @entry.koreanisch %></dd>
+
+    <dt class="label">Weitere Sprachen</dt>
+    <dd><%= @entry.weitere_sprachen %></dd>
+    <dt class="label">Alternative japanische Lesungen</dt>
+    <dd><%= @entry.alternative_japanische_lesungen %></dd>
+    <dt class="label">Schreibvarianten</dt>
+    <dd><%= @entry.schreibvarianten %></dd>
+    <dt class="label">Deutsche Übersetzung</dt>
+    <dd><%= @entry.deutsche_uebersetzung %></dd>
+    <dt class="label">Art des Lemmas</dt>
+    <dd><%= @entry.lemma_art %></dd>
+    <dt class="label">Jahreszahlen</dt>
+    <dd><%= @entry.jahreszahlen %></dd>
+    <dt class="label">Übersetzung</dt>
+    <dd><%=raw(@entry.uebersetzung) %></dd>
+    <dt class="label">Quellen</dt>
+    <dd><%= @entry.quellen %></dd>
+    <dt class="label">Literatur</dt>
+    <dd><%= @entry.literatur %></dd>
+    <dt class="label">Eigene Ergänzungen</dt>
+    <dd><%= @entry.eigene_ergaenzungen %></dd>
+    <dt class="label">Quellen Ergänzungen</dt>
+    <dd><%= @entry.quellen_ergaenzungen %></dd>
+    <dt class="label">Literatur Ergänzungen</dt>
+    <dd><%= @entry.literatur_ergaenzungen %></dd>
+  </dl> 
+  <% if @entry.user == current_user %>
+    <%= link_to 'Edit', edit_entry_path(@entry) %> |
+  <% end %>
   <%= link_to 'Back', entries_path %>
 <% end %>
