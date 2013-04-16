@@ -66,8 +66,8 @@
       </div>
     <% end %>
     <ul class="unstyled">
-    <% @entry.comments.order("updated_at DESC").each do |comment| %>
-      <li>
+      <% @entry.comments.order("updated_at DESC").each do |comment| %>
+        <li>
         <div name="comment">
           <strong><%= comment.user.name %> <label class="label label-info"><%= comment.user.role %></label></strong>
           <br />
@@ -82,8 +82,8 @@
           </div>
         <% end %>
         <hr>
-      </li>
-    <% end%>
+        </li>
+      <% end%>
     </ul>
     <%= form_for(Comment.new, :method => :post) do |f| %>
       <fieldset>

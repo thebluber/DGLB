@@ -22,6 +22,7 @@ end
 
 gem 'jquery-rails'
 gem "ckeditor"
+gem 'turbolinks'
 
 gem 'devise'
 gem "rspec-rails", :group => [:test, :development]
