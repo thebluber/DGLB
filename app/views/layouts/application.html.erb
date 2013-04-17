@@ -22,7 +22,9 @@
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
               <li><%= link_to "All entries", entries_path, :method => :get %></li>
               <li><%= link_to "My entries", users_entries_path(current_user), :method => :get %></li>
-              <li><%= link_to "New entry", new_entry_path, :method => :get %></li>
+              <% if current_user.role == "admin" %>
+                <li><%= link_to "New entry", new_entry_path, :method => :get %></li>
+              <% end %>
             </ul>
           </li>
       </ul>

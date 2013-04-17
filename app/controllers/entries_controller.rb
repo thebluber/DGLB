@@ -29,10 +29,14 @@ class EntriesController < ApplicationController
   # GET /entries/new.json
   def new
     @entry = Entry.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @entry }
+    if current_user.role == "admin"
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @entry }
+      end
+    else 
+      flash[:notice] = 'You are not allowed to create new entries!'
+      redirect_to :action => 'index'
     end
   end
 

@@ -1,4 +1,10 @@
 <% content_for :content do %>
+  <% if flash[:notice] %>
+    <div class="alert alert-notice">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
   <h1>Listing entries</h1>
 
   <table class="table table-striped">
