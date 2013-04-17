@@ -11,15 +11,9 @@
   <% end %>
   <fieldset class="inputs well form-horizontal">
     <div class="control-group">
-      <%= f.label :verfasser, :class => "control-label" %>
+      <%= f.label :namenskuerzel, :class => "control-label" %>
       <div class="controls">
-        <span class="field">
-          <% if @entry.user != nil %>
-            <%= @entry.user.name %>
-          <% else %>
-            <%= current_user.name %>
-          <% end %>
-        </span>
+        <%= f.text_field :namenskuerzel %>
       </div>
     </div>
     
