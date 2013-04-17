@@ -5,10 +5,11 @@
       <strong><%= flash[:notice] %></strong>
     </div>
   <% end %>
-  <h1>Listing my  entries</h1>
+  <h1>Listing my entries</h1>
 
   <table class="table table-striped">
     <tr>
+      <th>Verfasser</th>
       <th>Namenskürzel</th>
       <th>Kennzahl</th>
       <th>Spaltenzahl</th>
@@ -21,6 +22,7 @@
 
     <% @entries.each do |entry| %>
       <tr>
+        <td><%= entry.user.name %></td>
         <td><%= entry.namenskuerzel %></td>
         <td><%= entry.kennzahl %></td>
         <td><%= entry.spaltenzahl %></td>
