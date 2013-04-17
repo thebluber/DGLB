@@ -10,17 +10,19 @@
     </div>
   <% end %>
   <fieldset class="inputs well form-horizontal">
-    <div class="control-group">
-      <%= f.label :verfasser, :class => "control-label" %>
-      <div class="controls">
-        <% if @entry.user_id.nil? %>
-          <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }, { :selected => current_user.id}) %>
-        <% else %>
-          <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }) %>
-        <% end %>
+    <% if current_user.role == 'admin' %>
+      <div class="control-group">
+        <%= f.label :verfasser, :class => "control-label" %>
+        <div class="controls">
+          <% if @entry.user_id.nil? %>
+            <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }, { :selected => current_user.id}) %>
+          <% else %>
+            <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }) %>
+          <% end %>
 
+        </div>
       </div>
-    </div>
+    <% end %>
     <div class="control-group">
       <%= f.label :namenskuerzel, :class => "control-label" %>
       <div class="controls">

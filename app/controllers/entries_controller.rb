@@ -44,7 +44,7 @@ class EntriesController < ApplicationController
   def edit
     @entry = Entry.find(params[:id])
     if @entry.user != current_user && current_user.role != "admin"
-      flash[:notice] = "You are not allowed to edit entries of someone else. Write a commet instead."
+      flash[:notice] = "You are not allowed to edit entries of someone else. Write a comment instead."
       redirect_to :action => 'show' 
     end
   end
@@ -71,6 +71,10 @@ class EntriesController < ApplicationController
   # PUT /entries/1.json
   def update
     @entry = Entry.find(params[:id])
+    if current_user.role == 'admin'
+      @verfasser = User.find(params[:entry].delete('user_id'))
+      @entry.user = @verfasser
+    end
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
