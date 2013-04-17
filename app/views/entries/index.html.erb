@@ -28,7 +28,7 @@
         <td><%= entry.japanische_umschrift %></td>
         <td><%= entry.kanji %></td>
         <td><%= link_to 'Show', entry %>
-        <% if entry.user == current_user %>
+        <% if entry.user == current_user || current_user.role == 'admin' %>
           <%= link_to 'Edit', edit_entry_path(entry) %>
           <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
@@ -42,7 +42,4 @@
     <% end %>
   </table>
 
-  <br />
-
-  <%= link_to 'New Entry', new_entry_path %>
 <% end %>
