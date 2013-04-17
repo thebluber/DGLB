@@ -14,7 +14,7 @@
       <%= f.label :verfasser, :class => "control-label" %>
       <div class="controls">
         <% if @entry.user_id.nil? %>
-          <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }, { :selected => 1}) %>
+          <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }, { :selected => current_user.id}) %>
         <% else %>
           <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }) %>
         <% end %>
