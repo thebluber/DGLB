@@ -1,6 +1,8 @@
 <% content_for :content do %>
 
   <dl class="dl">
+    <dt class="label">Verfasser</dt>
+    <dd><%= @entry.user.name %></dd>
     <dt class="label">Namenskürzel</dt>
     <dd><%= @entry.namenskuerzel %></dd>
 

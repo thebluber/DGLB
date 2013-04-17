@@ -11,6 +11,17 @@
   <% end %>
   <fieldset class="inputs well form-horizontal">
     <div class="control-group">
+      <%= f.label :verfasser, :class => "control-label" %>
+      <div class="controls">
+        <% if @entry.user_id.nil? %>
+          <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }, { :selected => 1}) %>
+        <% else %>
+          <%= select("entry", "user_id", User.all.collect {|p| [ p.name, p.id ] }) %>
+        <% end %>
+
+      </div>
+    </div>
+    <div class="control-group">
       <%= f.label :namenskuerzel, :class => "control-label" %>
       <div class="controls">
         <%= f.text_field :namenskuerzel %>

@@ -52,8 +52,9 @@ class EntriesController < ApplicationController
   # POST /entries
   # POST /entries.json
   def create
+    @verfasser = User.find(params[:entry].delete('user_id'))
     @entry = Entry.new(params[:entry])
-    @entry.user = current_user
+    @entry.user = @verfasser
 
     respond_to do |format|
       if @entry.save
