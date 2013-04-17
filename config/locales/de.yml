@@ -1,0 +1,6 @@
+de:
+  activerecord:
+    attributes:
+      entry:
+        verfasser: "Namenskürzel"
+
