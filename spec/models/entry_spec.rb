@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Entry do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @entry = FactoryGirl.create(:entry)
+  end
+  it "should create a new instance of an entry given valid attributes" do
+    @entry.should be_persisted
+  end
+  
 end

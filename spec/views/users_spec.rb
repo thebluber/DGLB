@@ -5,7 +5,7 @@ describe "users management api" do
     it "should sign in user before displaying dashboard and sign out user" do
       visit root_path
       page.should have_content("Sign in")
-      user = FactoryGirl.create(:user)
+      user = FactoryGirl.create(:editor)
       fill_in "Email", :with => user.email
       fill_in "Password", :with => "anything"
       click_button "Sign in"
@@ -28,7 +28,7 @@ describe "users management api" do
 
   describe "admin can view the users list and change users' role and delete user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @editor = FactoryGirl.create(:editor)
       admin = FactoryGirl.create(:admin)
       visit root_path
       fill_in "Email", :with => admin.email
@@ -47,14 +47,14 @@ describe "users management api" do
     it "can change user's role" do
       visit users_path
       first(:link, 'Show').click
-      select "editor", :from => "user_role"
+      select "admin", :from => "user_role"
       find("#update_user").click
-      @user.reload
-      @user.role.should == "editor"
+      @editor.reload
+      @editor.role.should == "admin"
     end
     it "should not show users list to common user" do
       click_link "abmelden"
-      fill_in "Email", :with => @user.email
+      fill_in "Email", :with => @editor.email
       fill_in "Password", :with => "anything"
       click_button "Sign in"
       visit users_path
@@ -65,7 +65,7 @@ describe "users management api" do
 
   describe "user can change his profile" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:editor)
       visit root_path
       fill_in "Email", :with => @user.email
       fill_in "Password", :with => "anything"
@@ -73,7 +73,7 @@ describe "users management api" do
     end
     it "should show edit page" do
       click_link "Konto"
-      page.should have_content("Editing user")
+      page.should have_content("Update profile")
       fill_in "Name", :with => "Tim Tom Tam"
       find("#update_user").click
       @user.reload
