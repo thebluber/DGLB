@@ -2,6 +2,7 @@ CKEDITOR.editorConfig = function( config )
 {
   config.toolbar = 'MyToolbar';
   config.extraPlugins = 'markups';
+  config.forcePasteAsPlainText = true;
 
   config.toolbar_MyToolbar =
     [
