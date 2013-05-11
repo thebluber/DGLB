@@ -16,7 +16,7 @@ namespace :db do
           #uebersetzung
           main_text = main_text_array.join("<br />")
         rescue
-          log = open("error_main_text.log", "w")
+          log = open("error_main_text.log", "a")
           log.puts file + "\n"
           log.close
         end
@@ -33,45 +33,58 @@ namespace :db do
         begin
           #0 - 5 bis titel des Lemmas, data in odd
           (0..5).each do |num|
-            if paras[num].children && num % 2 == 1
+            if paras[num].children.length > 0 && num % 2 == 1
               hash[FIELDS[paras[num - 1].children[0].text]] = paras[num].children[0].text
             end
           end
           #7 - 28 bis weitere Angaben, data in even
           (7..28).each do |num|
-            if paras[num].children && num % 2 == 0
+            if paras[num].children.length > 0 && num % 2 == 0
               hash[FIELDS[paras[num - 1].children[0].text]] = paras[num].children[0].text
             end
           end
           #30 - 33 bis Übersetzung, data in odd
           (30..33).each do |num|
-            if paras[num].children && num % 2 == 1
+            if paras[num].children.length > 0 && num % 2 == 1
               hash[FIELDS[paras[num - 1].children[0].text]] = paras[num].children[0].text
             end
           end
           #35 - 44 data in even
           (35..44).each do |num|
-            if paras[num].children && num % 2 == 0
+            if paras[num].children.length > 0 && num % 2 == 0
               hash[FIELDS[paras[num - 1].children[0].text]] = paras[num].children[0].text
             end
           end
-        rescue
-          log = open("error_paras.log", "w")
+        rescue Exception => e
+          log = open("error_paras.log", "a+")
           log.puts file + "\n"
+          log.puts e.to_s + "\n"
+          log.puts hash.to_s + "\n"
+          log.puts paras.to_s + "\n"
+          log.puts "-------------------------------------------"
           log.close
         end
 
         puts hash
+        
+        if !hash.empty? || !hash[nil]
 
-        new_entry = Entry.new(hash)
-        new_entry.page_reference = page_reference
-        new_entry.uebersetzung = main_text
-        new_entry.user = User.find(1)
+          begin
+            new_entry = Entry.new(hash)
+            new_entry.page_reference = page_reference
+            new_entry.uebersetzung = main_text
+            new_entry.user = User.find(1)
 
-        begin
-          new_entry.save
-        rescue => e
-          puts e
+            new_entry.save
+          rescue Exception => e
+            log = open("error_paras.log", "a+")
+            log.puts file + "\n"
+            log.puts e.to_s + "\n"
+            log.puts hash.to_s + "\n"
+            log.puts paras.to_s + "\n"
+            log.puts "-------------------------------------------"
+            log.close
+          end
         end
     end
   end
