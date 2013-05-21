@@ -218,6 +218,7 @@ DEPENDENCIES
   factory_girl_rails
   guard-rspec
   jquery-rails
+  nokogiri
   paper_trail (~> 2)
   pry
   rails (= 3.2.12)
