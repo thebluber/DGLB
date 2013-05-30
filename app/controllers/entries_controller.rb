@@ -3,7 +3,9 @@ class EntriesController < ApplicationController
   # GET /entries.json
   before_filter :authenticate_user!
   def index
-    @entries = Entry.all
+    params[:search] = nil if params[:search] and params[:search].strip == "" 
+    @page = params[:page] || 0
+    @entries = (params[:search] ? Entry.search(params[:search]) : Entry).page(@page)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,6 +26,8 @@ class EntriesController < ApplicationController
       format.json { render json: @entry }
     end
   end
+
+  
 
   # GET /entries/new
   # GET /entries/new.json

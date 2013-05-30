@@ -28,6 +28,7 @@ gem 'nokogiri'
 gem 'devise'
 gem "rspec-rails", :group => [:test, :development]
 gem "paper_trail", "~> 2"
+gem "kaminari"
 
 group :development do
   gem 'better_errors'
