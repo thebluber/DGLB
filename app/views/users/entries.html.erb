@@ -33,9 +33,8 @@
       <th>Spaltenzahl</th>
       <th>Japanische umschrift</th>
       <th>Kanji</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Aktionen</th>
+      <th>Kommentar</th>
     </tr>
 
     <% @entries.each do |entry| %>
@@ -52,6 +51,14 @@
           <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
       </td>
+        <td>
+          <% if entry.comments.length != 0 %>
+            <%= link_to entry.comments.length, entry_path(entry) + "#comments", :class => "badge badge-important comments" %>
+          <% end %>
+          <% if entry.freigeschaltet %>
+            <span class="label label-success">Freigeschaltet</span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>

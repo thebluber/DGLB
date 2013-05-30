@@ -58,6 +58,9 @@
           <% if entry.comments.length != 0 %>
             <%= link_to entry.comments.length, entry_path(entry) + "#comments", :class => "badge badge-important comments" %>
           <% end %>
+          <% if entry.freigeschaltet %>
+            <span class="label label-success">Freigeschaltet</span>
+          <% end %>
         </td>
       </tr>
     <% end %>
