@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def entries
     @page = params[:page] || 0
     params[:search] = nil if params[:search] and params[:search].strip == "" 
-    @entries = (params[:search] ? current_user.entries.where("japanische_umschrift LIKE ? OR kanji LIKE ? OR namenskuerzel = ? OR kennzahl = ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%") : current_user.entries).order("japanische_umschrift").page(@page)
+    @entries = (params[:search] ? current_user.entries.where("japanische_umschrift LIKE ? OR kanji LIKE ? OR namenskuerzel = ? OR kennzahl = ?", "%#{params[:search]}%", "%#{params[:search]}%", "#{params[:search]}", "#{params[:search]}") : current_user.entries).order("japanische_umschrift").page(@page)
     respond_to do |format|
       format.html # users_entries.html.erb
       format.json { render json: @entries }
