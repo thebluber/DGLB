@@ -82,6 +82,10 @@ namespace :db do
             new_entry = Entry.new(hash)
             new_entry.kennzahl = new_entry.kennzahl.split(":").map{|num| num.to_i }.join(":")
             new_entry.uebersetzung = main_text
+            LEMMAART = ["Person", "Tempel", "Werk", "Fachtermini", "Geographische Bezeichnung", "Ereignis"]
+            if new_entry.lemma_art
+              new_entry.lemma_art = LEMMAART[new_entry.lemma_art.to_i - 1]
+            end
           end
           new_entry.page_reference = page_reference
           new_entry.user = User.find(1)
