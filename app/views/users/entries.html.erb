@@ -48,7 +48,7 @@
         <td><%= link_to 'Show', entry %>
         <%= link_to 'Edit', edit_entry_path(entry) %>
         <% if current_user.role == 'admin' %>
-          <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Destroy', entry, method: :delete %>
         <% end %>
       </td>
         <td>
@@ -62,4 +62,6 @@
       </tr>
     <% end %>
   </table>
+  <%= paginate @entries %>
+
 <% end %>
