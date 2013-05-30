@@ -30,6 +30,7 @@ namespace :db do
       FIELDS = {"Verfasser/in         (Namenskürzel)" => :namenskuerzel, "Kennzahl des Lemmas  (z.B. 1304:1)" => :kennzahl, "Spaltenzahl (z.B. 15)" => :spaltenzahl, "Japanische Umschrift" => :japanische_umschrift, "Kanji" => :kanji, "Pali" => :pali, "Sanskrit " => :sanskrit, "Chinesisch" => :chinesisch, "Tibetisch " => :tibetisch, "Koreanisch " => :koreanisch, "Weitere Sprachen " => :weitere_sprachen, "Alternative japanische Lesungen" => :alternative_japanische_lesungen, "Schreibvarianten (Kanji + Lesungen) " => :schreibvarianten, "Dt. Übersetzung " => :deutsche_uebersetzung, "Art des Lemmas  [Ziffer eingeben]  (1 Person, 2 Tempel, 3 Werk, 4 Fachtermini, 5 geographische Bezeichnung, 6 Ereignis)" => :lemma_art, "Jahreszahlen (westl. Zeitrechnung) " => :jahreszahlen, "Quellen" => :quellen, "Literatur        (m/w)" => :literatur, "Eigene Ergänzungen" => :eigene_ergaenzungen, "Ergänzungen der Quellenangaben" => :quellen_ergaenzungen, "Ergänzungen der Literaturangaben        (m/w)" => :literatur_ergaenzungen}
       hash = Hash.new
       paras = entry.xpath("//tgroup//para")
+      not_parsing_entry_done = false
 
       begin
         #0 - 5 bis titel des Lemmas, data in odd
@@ -56,32 +57,36 @@ namespace :db do
             hash[FIELDS[paras[num - 1].children[0].text]] = paras[num].children[0].text
           end
         end
-      rescue Exception => e
-        log = open("error_paras.log", "a+")
-        log.puts file + "\n"
-        log.puts e.to_s + "\n"
-        log.puts hash.to_s + "\n"
-        log.puts paras.to_s + "\n"
-        log.puts "-------------------------------------------"
-        log.close
-      end
 
-      puts hash
-
-
-      begin
-        if hash.empty? || hash[nil]
+      rescue
           new_entry = Entry.new
           not_parsing_entry = []
           entry.xpath("//para").each{|p| not_parsing_entry.push(p)}
           new_entry.uebersetzung = not_parsing_entry.join("<br />")
-        else 
-          new_entry = Entry.new(hash)
-          new_entry.uebersetzung = main_text
-        end
           new_entry.page_reference = page_reference
           new_entry.user = User.find(1)
           new_entry.save
+          not_parsing_entry_done = true
+      end
+
+      puts hash
+
+      begin
+        if !not_parsing_entry_done 
+          if hash.empty? || hash[nil]
+            new_entry = Entry.new
+            not_parsing_entry = []
+            entry.xpath("//para").each{|p| not_parsing_entry.push(p)}
+            new_entry.uebersetzung = not_parsing_entry.join("<br />")
+          else 
+            new_entry = Entry.new(hash)
+            new_entry.kennzahl = new_entry.kennzahl.split(":").map{|num| num.to_i }.join(":")
+            new_entry.uebersetzung = main_text
+          end
+          new_entry.page_reference = page_reference
+          new_entry.user = User.find(1)
+          new_entry.save
+        end
       rescue Exception => e
         log = open("error_paras.log", "a+")
         log.puts file + "\n"

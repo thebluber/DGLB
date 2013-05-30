@@ -1,5 +1,5 @@
 #encoding:utf-8
-def to_kennzahl(kennzahl_array)
+def to_filename(kennzahl_array)
   first = kennzahl_array[0]
   last = kennzahl_array[1]
 
@@ -50,16 +50,25 @@ namespace :db do
         end
         begin
           puts lema[0]
-          e = Entry.new(entry)
-          e.user = User.find(1)
-          if lema[5] && lema[5] == "Link zu HTML-Datei"
-            e.page_reference = to_kennzahl(kennzahl)
+          puts entry
+          if Entry.where("kennzahl = ?", "#{entry[:kennzahl]}").length == 0
+            e = Entry.new(entry)
+            e.user = User.find(1)
+            if lema[5] && lema[5] == "Link zu HTML-Datei"
+              e.page_reference = to_filename(kennzahl)
+              puts e.page_reference
+              file = open("gesamt/#{e.page_reference}").read
+              e.uebersetzung = file
+            end
+            e.save
           end
-          e.save
-        rescue
-          e.reload()
-          puts index
-          puts e
+        rescue Exception => e
+          file = open("error_log", "a+")
+          file.puts index
+          file.puts entry
+          file.puts e
+          file.puts "---------------------------"
+          file.close
         end
         index += 1
       end
