@@ -60,11 +60,11 @@ ActiveRecord::Schema.define(:version => 20130530120233) do
     t.text     "eigene_ergaenzungen"
     t.text     "quellen_ergaenzungen"
     t.text     "literatur_ergaenzungen"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.integer  "user_id"
     t.string   "page_reference"
-    t.boolean  "freigeschaltet"
+    t.boolean  "freigeschaltet",                  :default => false
   end
 
   create_table "users", :force => true do |t|

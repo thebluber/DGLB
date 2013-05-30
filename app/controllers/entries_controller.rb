@@ -57,6 +57,7 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @verfasser = User.find(params[:entry].delete('user_id'))
+    params[:entry].delete("freigeschaltet")
     @entry = Entry.new(params[:entry])
     @entry.user = @verfasser
 
@@ -79,7 +80,7 @@ class EntriesController < ApplicationController
       @verfasser = User.find(params[:entry].delete('user_id'))
       @entry.user = @verfasser
     end
-
+    
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
         format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
