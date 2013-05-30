@@ -2,5 +2,16 @@ de:
   activerecord:
     attributes:
       entry:
-        verfasser: "Namenskürzel"
+        namenskuerzel: "Namenskürzel"
+        japanische_umschrift: "Japanische Umschrift"
+        weitere_sprachen: "Weitere Sprachen"
+        alternative_japanische_lesungen: "Alternative japanische Lesungen"
+        deutsche_uebersetzung: "Deutsche Übersetzung"
+        lemma_art: "Lemma-Art"
+        uebersetzung: "Übersetzung/Haupttext"
+        quellen: "Quellen SBDJ"
+        quellen_ergaenzungen: "Quellen Ergänzungen"
+        eigene_ergaenzungen: "Eigene Ergänzungen"
+        literatur: "Literatur SBDJ"
+        literatur_ergaenzungen: "Literatur Ergänzungen"
 
