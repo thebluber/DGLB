@@ -30,6 +30,8 @@
         <td><%= link_to 'Show', entry %>
         <% if entry.user == current_user || current_user.role == 'admin' %>
           <%= link_to 'Edit', edit_entry_path(entry) %>
+        <% end %>
+        <% if current_user.role == 'admin' %>
           <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
         </td>
