@@ -20,7 +20,7 @@
   <% if flash[:notice] %> 
     <div class="alert alert-notice">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong><%= flash[:notice] %></strong>
+      <strong><%= raw(flash[:notice]) %></strong>
     </div>
   <% end %>
   <h1>Listing my entries</h1>

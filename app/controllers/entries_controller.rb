@@ -27,7 +27,6 @@ class EntriesController < ApplicationController
     end
   end
 
-  
 
   # GET /entries/new
   # GET /entries/new.json
@@ -83,7 +82,7 @@ class EntriesController < ApplicationController
     
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
+        format.html { redirect_to @entry, notice: "Entry was successfully updated. #{undo_link}" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -99,8 +98,13 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to entries_url }
+      format.html { redirect_to entries_url, notice: "Successfully destroyed entry. #{undo_link}" }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def undo_link
+    view_context.link_to("undo", revert_version_path(@entry.versions.scoped.last), :method => :post)
   end
 end
