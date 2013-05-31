@@ -178,3 +178,6 @@ hr {
 .action {
   float: right;
 }
+.sidebar-nav-fixed {
+  position:fixed;
+}
