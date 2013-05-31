@@ -1,9 +1,62 @@
-<% content_for :content do %>
-  <% if flash[:notice] %> 
-    <div class="alert alert-notice">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong><%= flash[:notice] %></strong>
-    </div>
-  <% end %>
+<% content_for :sidebar do %>
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">Suche</li>
+      <%= form_tag entries_path, method: "get", id: "search_form" do %>
+        <fieldset>
+          <li>
+            <label for="search">Suchbegriff</label>
+            <input type="text" id="search" name="search" class="span12" value="<%= params[:search] %>"></input>
+          </li>
+        <fieldset>
+        <li>
+          <button id="search_button" class="btn">Suchen</button>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
+<% content_for :content do %>
+  <% if flash[:notice] %>
+    <div class="alert alert-notice">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong><%= raw(flash[:notice]) %></strong>
+    </div>
+  <% end %>
+  <h1>Home</h1>
+
+  <%= paginate @entries %>
+  <table class="table table-striped">
+    <tr>
+      <th>Romaji</th>
+      <th>Kanji</th>
+      <th>P.</th>
+      <th>S.</th>
+      <th>C.</th>
+      <th>T.</th>
+      <th>K.</th>
+      <th>Dt.Übers.</th>
+      <th>Übersetzung</th>
+      <th></th>
+    </tr>
+
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= entry.japanische_umschrift %></td>
+        <td><%= entry.kanji %></td>
+        <td><%= entry.pali %></td>
+        <td><%= entry.sanskrit %></td>
+        <td><%= entry.chinesisch %></td>
+        <td><%= entry.tibetisch %></td>
+        <td><%= entry.koreanisch %></td>
+	<td><%= entry.deutsche_uebersetzung %></td>
+	<td><%= entry.uebersetzung ? entry.uebersetzung[0..50] + "..." : "" %></td>
+        <td><%= link_to 'Show', entry %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @entries %>
+
+<% end %>
