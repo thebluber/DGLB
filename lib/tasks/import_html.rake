@@ -20,6 +20,9 @@ namespace :db do
   task :import_html=> :environment do
     lemalist = open("lemalist.tab").read.split("\r").map{|l| l.split("\t")}
     index = 0
+    not_in_data = 0
+    in_data = 0
+    not_parsing = 0
     lemalist.each do |lema|
       if lema.length >= 4
         entry = Hash.new
@@ -61,8 +64,15 @@ namespace :db do
               e.uebersetzung = file
             end
             e.save
+            not_in_data += 1
+          else
+            file = open("in_data", "a+")
+            file.puts lema[0]
+            file.close
+            in_data += 1
           end
         rescue Exception => e
+          not_parsing += 1
           file = open("error_log", "a+")
           file.puts index
           file.puts entry
@@ -71,6 +81,10 @@ namespace :db do
           file.close
         end
         index += 1
+        puts "total: " + index.to_s
+        puts "entries_not_in_data: " + not_in_data.to_s
+        puts "entries_in_data: " + in_data.to_s
+        puts "not_parsing: " + not_parsing.to_s
       end
     end
   end
