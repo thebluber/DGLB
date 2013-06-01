@@ -40,6 +40,7 @@ namespace :db do
       new_entry.user = User.first
       new_entry.page_reference = page_reference
       nils = []
+      LEMMAART = ["Person", "Tempel", "Werk", "Fachtermini", "Geographische Bezeichnung", "Ereignis"]
 
       begin
         #0 - 5 bis titel des Lemmas, data in odd
@@ -89,7 +90,6 @@ namespace :db do
         
         new_entry.kennzahl = new_entry.kennzahl.split(":").map{|num| num.to_i }.join(":")
         new_entry.uebersetzung = main_text
-        LEMMAART = ["Person", "Tempel", "Werk", "Fachtermini", "Geographische Bezeichnung", "Ereignis"]
         if new_entry.lemma_art
           new_entry.lemma_art = LEMMAART[new_entry.lemma_art.to_i - 1]
         end
@@ -106,6 +106,9 @@ namespace :db do
       rescue Exception => e
         not_parsing_entry = []
         entry.xpath("//para").each{|p| not_parsing_entry.push(p)}
+        if new_entry.lemma_art
+          new_entry.lemma_art = LEMMAART[new_entry.lemma_art.to_i - 1]
+        end
         new_entry.uebersetzung = not_parsing_entry.join("<br />")
         new_entry.save
         log = open("error_paras.log", "a+")
