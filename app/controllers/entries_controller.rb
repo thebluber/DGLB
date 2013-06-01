@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
   def index
     params[:search] = nil if params[:search] and params[:search].strip == "" 
     @page = params[:page] || 0
-    @entries = (params[:search] ? Entry.search(params[:search]) : Entry).order("japanische_umschrift").page(@page)
+    @entries = (params[:search] ? Entry.search(params[:search]) : Entry).order("romaji_oder").page(@page)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20130531151801) do
     t.integer  "user_id"
     t.string   "page_reference"
     t.boolean  "freigeschaltet",                  :default => false
-    t.string   "order"
+    t.string   "romaji_order"
   end
 
   create_table "users", :force => true do |t|
