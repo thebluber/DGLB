@@ -19,6 +19,8 @@
 <% content_for :content do %>
   <h1>Editing entry</h1>
 
+  <%= link_to "Scan der Originalseite anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{@entry.page_reference[1,4]}.jpg", :target => "_blank" %>
+
   <%= form_for @entry, :html => {:class => "form-horizontal"} do |f| %>
     <%= render :partial => 'entries/form', :locals => {:f => f}%>
   <% end %>
