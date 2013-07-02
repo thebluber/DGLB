@@ -23,68 +23,70 @@ namespace :db do
     not_in_data = 0
     in_data = 0
     not_parsing = 0
-    lemalist.each do |lema|
-      if lema.length >= 4
-        entry = Hash.new
-        kennzahl = lema[1].split(/[,.]/)
-        japanese = lema[2].split(/[\s]/)
-        entry[:kennzahl] = kennzahl.join(":")
+    Entry.transaction do 
+      lemalist.each do |lema|
+        if lema.length >= 4
+          entry = Hash.new
+          kennzahl = lema[1].split(/[,.]/)
+          japanese = lema[2].split(/[\s]/)
+          entry[:kennzahl] = kennzahl.join(":")
 
-        if japanese.length == 3
-          entry[:kanji] = japanese[2]
-          entry[:japanische_umschrift] = japanese[0] + " " + japanese[1]
-        elsif japanese[1] 
-          entry[:kanji] = japanese[1]
-          entry[:japanische_umschrift] = japanese[0]
-        else
-          entry[:japanische_umschrift] = japanese[0]
-        end
-        
-        if lema[3] != ""
-          other = lema[3].split(",")
-          if other.length == 1
-            entry[:sanskrit] = lema[3]
+          if japanese.length == 3
+            entry[:kanji] = japanese[2]
+            entry[:japanische_umschrift] = japanese[0] + " " + japanese[1]
+          elsif japanese[1] 
+            entry[:kanji] = japanese[1]
+            entry[:japanische_umschrift] = japanese[0]
           else
-            entry[:weitere_sprachen] = lema[3]
+            entry[:japanische_umschrift] = japanese[0]
           end
-        end
-        if lema[4] && lema[4] != ""
-          entry[:spaltenzahl] = lema[4].match(/\(([0-9]+)\)/)[1]
-        end
-        begin
-          puts lema[0]
-          puts entry
-          if Entry.where("kennzahl = ?", "#{entry[:kennzahl]}").length == 0
-            e = Entry.new(entry)
-            e.user = User.find(1)
-            if lema[5] && lema[5] == "Link zu HTML-Datei"
-              e.page_reference = to_filename(kennzahl)
-              puts e.page_reference
-              file = open("gesamt/#{e.page_reference}").read
-              e.uebersetzung = file
+
+          if lema[3] != ""
+            other = lema[3].split(",")
+            if other.length == 1
+              entry[:sanskrit] = lema[3]
+            else
+              entry[:weitere_sprachen] = lema[3]
             end
-            e.save
-            not_in_data += 1
-          else
-            file = open("in_data", "a+")
-            file.puts lema[0]
-            file.close
-            in_data += 1
           end
-        rescue Exception => e
-          not_parsing += 1
-          file = open("error_log", "a+")
-          file.puts index
-          file.puts entry
-          file.puts e
-          file.puts "---------------------------"
-          file.close
+          if lema[4] && lema[4] != ""
+            entry[:spaltenzahl] = lema[4].match(/\(([0-9]+)\)/)[1]
+          end
+          begin
+            puts lema[0]
+            puts entry
+            if Entry.where("kennzahl = ?", "#{entry[:kennzahl]}").length == 0
+              e = Entry.new(entry)
+              e.user = User.find(1)
+              if lema[5] && lema[5] == "Link zu HTML-Datei"
+                e.page_reference = to_filename(kennzahl)
+                puts e.page_reference
+                file = open("gesamt/#{e.page_reference}").read
+                e.uebersetzung = file
+              end
+              e.save
+              not_in_data += 1
+            else
+              file = open("in_data", "a+")
+              file.puts lema[0]
+              file.close
+              in_data += 1
+            end
+          rescue Exception => e
+            not_parsing += 1
+            file = open("error_log", "a+")
+            file.puts index
+            file.puts entry
+            file.puts e
+            file.puts "---------------------------"
+            file.close
+          end
+          index += 1
+          puts "total: " + index.to_s
+          puts "entries_not_in_data: " + not_in_data.to_s
+          puts "entries_in_data: " + in_data.to_s
+          puts "not_parsing: " + not_parsing.to_s
         end
-        index += 1
-        puts "total: " + index.to_s
-        puts "entries_not_in_data: " + not_in_data.to_s
-        puts "entries_in_data: " + in_data.to_s
-        puts "not_parsing: " + not_parsing.to_s
       end
     end
   end
