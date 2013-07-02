@@ -13,6 +13,11 @@
           <button id="search_button" class="btn">Suchen</button>
         </li>
       <% end %>
+      <li class="nav-header">Scan der Originalseite</li>
+      <li>
+      <% page = @entry.page_reference[1,4] %>
+      <%= link_to "Seite #{page} anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{page}.jpg", :target => "_blank" %>
+      </li>
     </ul>
   </div>
 <% end %>

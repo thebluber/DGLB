@@ -13,14 +13,16 @@
           <button id="search_button" class="btn">Suchen</button>
         </li>
       <% end %>
+      <li class="nav-header">Scan der Originalseite</li>
+      <li>
+      <% page = @entry.page_reference[1,4] %>
+      <%= link_to "Seite #{page} anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{page}.jpg", :target => "_blank" %>
+      </li>
     </ul>
   </div>
 <% end %>
 <% content_for :content do %>
   <h1>Editing entry</h1>
-
-  <%= link_to "Scan der Originalseite anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{@entry.page_reference[1,4]}.jpg", :target => "_blank" %>
-
   <%= form_for @entry, :html => {:class => "form-horizontal"} do |f| %>
     <%= render :partial => 'entries/form', :locals => {:f => f}%>
   <% end %>
