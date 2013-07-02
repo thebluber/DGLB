@@ -52,6 +52,8 @@ namespace :db_setup do
     run "chmod 1777 #{deploy_to}/#{shared_dir}/pdf/"
     run "mkdir -p #{deploy_to}/#{shared_dir}/index/"
     run "chmod -R 1777 #{deploy_to}/#{shared_dir}/index/"
+    run "mkdir -p #{deploy_to}/#{shared_dir}/SBDJ-Original-JPGs/"
+    run "chmod -R 1777 #{deploy_to}/#{shared_dir}/SBDJ-Original-JPGs/"
   end
 
   task :link_shared do
