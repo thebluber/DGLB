@@ -14,9 +14,9 @@
       <%= link_to "Das große Lexikon des Buddhismus", root_path, :class => 'brand' %>
       <ul class="nav">
         <% if current_user.role == "admin" %>
-          <li><%= link_to "Users", users_path, :method => :get %></li>
+          <li><%= link_to "Users", users_path, :method => :get, :target => "_self" %></li>
         <% end %>
-          <li><%= link_to "Konto", edit_user_path(current_user), :method => :get %></li>
+        <li><%= link_to "Konto", edit_user_path(current_user), :method => :get, :target => "_self" %></li>
           <li class="dropdown">
             <a class='dropdown-toggle' data-toggle='dropdown' href='#'>Entries</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
