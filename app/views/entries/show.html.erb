@@ -19,6 +19,9 @@
         <% page = @entry.page_reference[1,4] %>
         <%= link_to "Seite #{page} anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{page}.jpg", :target => "_blank" %>
         </li>
+        <li>
+        <%= link_to "Seite #{(page.to_i + 1).to_s} anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{(page.to_i + 1).to_s}.jpg", :target => "_blank" %>
+        </li>
       <% end %>
     </ul>
   </div>
