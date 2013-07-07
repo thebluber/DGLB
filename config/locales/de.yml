@@ -14,4 +14,9 @@ de:
         eigene_ergaenzungen: "Eigene Ergänzungen"
         literatur: "Literatur SBDJ"
         literatur_ergaenzungen: "Literatur Ergänzungen"
-
+    errors:
+      models:
+        user:
+          attributes:
+            reset_password_token:
+              invalid: "Bitte geben Sie Ihr neues Passwort ein!"
