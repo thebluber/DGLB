@@ -49,11 +49,11 @@ DGLB::Application.configure do
   config.assets.precompile += Ckeditor.assets
 
   # Disable delivery errors, bad email addresses will be ignored
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Email
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "134.2.3.2", :openssl_verify_mode => 'none'}
+  config.action_mailer.smtp_settings = { :address => "134.2.191.179", :openssl_verify_mode => 'none'}
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'buddhismus-lexikon.eu' }
 
