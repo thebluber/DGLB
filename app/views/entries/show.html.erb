@@ -20,7 +20,18 @@
         <%= link_to "Seite #{page} anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{page}.jpg", :target => "_blank" %>
         </li>
         <li>
-        <%= link_to "Seite 0#{(page.to_i + 1).to_s} anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_0#{(page.to_i + 1).to_s}.jpg", :target => "_blank" %>
+        <%
+          #The next page should be linked too. REASON: dictionary entry could be on 2 or even more pages...
+        #I am not paid enough for preventing error triggered by non-existing 2. page!
+      %>
+        <% page2 = (page.to_i + 1).to_s %>
+        <% diff = 4 - page2.length%>
+        <% while diff > 0 do %>
+          <% page2 = "0" + page2 %>
+          <% diff -= 1 %>
+        <% end %>
+
+        <%= link_to "Seite #{page2} anzeigen", "/SBDJ-Original-JPGs/SBDJ_Seite_#{page2}.jpg", :target => "_blank" %>
         </li>
       <% end %>
     </ul>
