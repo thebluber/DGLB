@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:index, :entries, :edit, :show, :new, :update, :update_role, :destroy, :create]
 
   def index
     @users = User.all
