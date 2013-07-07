@@ -26,6 +26,7 @@ gem 'turbolinks'
 gem 'nokogiri'
 
 gem 'devise'
+gem 'devise-i18n-views'
 gem "rspec-rails", :group => [:test, :development]
 gem "paper_trail", "~> 2"
 gem "kaminari"
