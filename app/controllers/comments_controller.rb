@@ -32,6 +32,7 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    @entry = @comment.entry
     if @comment.user != current_user && current_user.role != "admin"
       flash[:notice] = 'Access denied!'
       redirect_to entry_path(@comment.entry) + "#comments"
