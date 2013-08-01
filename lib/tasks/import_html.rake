@@ -62,7 +62,9 @@ namespace :db do
                 e.page_reference = to_filename(kennzahl)
                 puts e.page_reference
                 file = open("gesamt/#{e.page_reference}").read
-                e.uebersetzung = file
+                detection = CharlockHolmes::EncodingDetector.detect(file)
+                utf8_encoded_content = CharlockHolmes::Converter.convert file, detection[:encoding], 'UTF-8'
+                e.uebersetzung = utf8_encoded_content
               end
               e.save
               not_in_data += 1

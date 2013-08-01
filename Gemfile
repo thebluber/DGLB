@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem "ckeditor"
 gem 'turbolinks'
 gem 'nokogiri'
+gem 'charlock_holmes'
 
 gem 'devise'
 gem 'devise-i18n-views'

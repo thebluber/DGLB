@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130531151801) do
+ActiveRecord::Schema.define(:version => 20130801172051) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -66,6 +66,34 @@ ActiveRecord::Schema.define(:version => 20130531151801) do
     t.string   "page_reference"
     t.boolean  "freigeschaltet",                  :default => false
     t.string   "romaji_order"
+  end
+
+# Could not dump table "entries_fts" because of following StandardError
+#   Unknown type '' for column 'id'
+
+# Could not dump table "entries_fts_content" because of following StandardError
+#   Unknown type '' for column 'c0id'
+
+  create_table "entries_fts_docsize", :primary_key => "docid", :force => true do |t|
+    t.binary "size"
+  end
+
+  create_table "entries_fts_segdir", :primary_key => "level", :force => true do |t|
+    t.integer "idx"
+    t.integer "start_block"
+    t.integer "leaves_end_block"
+    t.integer "end_block"
+    t.binary  "root"
+  end
+
+  add_index "entries_fts_segdir", ["level", "idx"], :name => "sqlite_autoindex_entries_fts_segdir_1", :unique => true
+
+  create_table "entries_fts_segments", :primary_key => "blockid", :force => true do |t|
+    t.binary "block"
+  end
+
+  create_table "entries_fts_stat", :force => true do |t|
+    t.binary "value"
   end
 
   create_table "users", :force => true do |t|

@@ -49,6 +49,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
+    charlock_holmes (0.6.9.4)
     childprocess (0.3.7)
       ffi (~> 1.0, >= 1.0.6)
     ckeditor (4.0.2)
@@ -215,6 +216,7 @@ DEPENDENCIES
   binding_of_caller
   capistrano
   capybara
+  charlock_holmes
   ckeditor
   coffee-rails (~> 3.2.1)
   database_cleaner
