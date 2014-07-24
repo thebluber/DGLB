@@ -27,7 +27,7 @@ module ImportEntryDocHelper
       lemma_art = { "1" => "Person",
                     "2" => "Tempel",
                     "3" => "Werk",
-                    "4" => "Fachtermini",
+                    "4" => "Fachterminus",
                     "5" => "Geographische Bezeichnung",
                     "6" => "Ereignis"
       }
@@ -42,8 +42,6 @@ module ImportEntryDocHelper
           end
         end
       end
-
-      raise 'Kennzahl is empty: ' + file if entry.kennzahl.blank?
 
       #Import 2. table Literatur, Quellen
       fields = [:quellen, :literatur]
@@ -77,15 +75,14 @@ module ImportEntryDocHelper
       text = tag_entry_text(translation.to_html, tagged_words)
       entry.update_attribute(:uebersetzung, text)
 
-      entry.page_reference = file[/\/.+\./].gsub("/", "").gsub(".", ".doc")
-
-      entry.save
-
     rescue Exception => e
       log.puts file
+      log.puts e
+      log.puts "=========================================================="
     end
 
     log.close
+    entry.save
   end
 
 
