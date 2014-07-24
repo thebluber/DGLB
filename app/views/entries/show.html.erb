@@ -89,17 +89,17 @@
     <dt class="label">Jahreszahlen</dt>
     <dd><%= @entry.jahreszahlen %></dd>
     <dt class="label">Übersetzung</dt>
-    <dd><%=raw(@entry.uebersetzung) %></dd>
+    <dd><%= raw(@entry.uebersetzung) %></dd>
     <dt class="label">Quellen</dt>
-    <dd><%= @entry.quellen %></dd>
+    <dd><%= raw(@entry.quellen) %></dd>
     <dt class="label">Literatur</dt>
-    <dd><%= @entry.literatur %></dd>
+    <dd><%= raw(@entry.literatur) %></dd>
     <dt class="label">Eigene Ergänzungen</dt>
-    <dd><%= @entry.eigene_ergaenzungen %></dd>
+    <dd><%= raw(@entry.eigene_ergaenzungen) %></dd>
     <dt class="label">Quellen Ergänzungen</dt>
-    <dd><%= @entry.quellen_ergaenzungen %></dd>
+    <dd><%= raw(@entry.quellen_ergaenzungen) %></dd>
     <dt class="label">Literatur Ergänzungen</dt>
-    <dd><%= @entry.literatur_ergaenzungen %></dd>
+    <dd><%= raw(@entry.literatur_ergaenzungen) %></dd>
   </dl> 
   <% if @entry.user == current_user %>
     <%= link_to 'Edit', edit_entry_path(@entry) %> |
