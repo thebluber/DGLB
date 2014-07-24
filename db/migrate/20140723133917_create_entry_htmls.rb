@@ -16,7 +16,7 @@ class CreateEntryHtmls < ActiveRecord::Migration
       t.string :schreibvarianten
       t.string :deutsche_uebersetzung
       t.string :lemma_art
-      t.string :jahreszahl
+      t.string :jahreszahlen
       t.text :uebersetzung
       t.integer :entry_id
       t.string :romaji_order
