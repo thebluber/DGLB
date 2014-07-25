@@ -7,7 +7,7 @@ DGLB::Application.routes.draw do
 
 
   root :to => "home#index"
-  devise_for :users
+  devise_for :users, :skip => :registration
   resources :users, :except => :new
   match "users/:id/update_role" => "users#update_role", :as => "update_user_role", :via => :put       
   match "users/:id/entries" => "users#entries", :as => "users_entries", :via => :get
