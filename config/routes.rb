@@ -1,5 +1,9 @@
 DGLB::Application.routes.draw do
 
+  get "entry_html/show"
+
+  get "entry_doc/show"
+
   resources :comments
 
 
@@ -15,6 +19,8 @@ DGLB::Application.routes.draw do
 
   resources :entries
   resources :comments
+  resources :entry_docs
+  resources :entry_htmls
   match "tutorial" => "tutorial#index", :via => :get
 
   # The priority is based upon order of creation:
