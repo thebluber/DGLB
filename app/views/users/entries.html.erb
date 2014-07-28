@@ -49,7 +49,7 @@
           <%= link_to 'Bearbeiten', edit_entry_path(entry) %>
         <% if current_user.admin? %>
           <br/>
-          <%= link_to 'Löschen', entry, method: :delete %>
+          <%= link_to 'Löschen', entry, method: :delete, data: { confirm: 'Wollen Sie diesen Eintrag wirklich löschen?' }%>
         <% end %>
         </td>
         <td>

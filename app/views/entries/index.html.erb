@@ -52,7 +52,7 @@
         <% end %>
         <% if current_user.admin? %>
           <br/>
-          <%= link_to 'Löschen', entry, method: :delete %>
+          <%= link_to 'Löschen', entry, method: :delete, data: { confirm: 'Wollen Sie diesen Eintrag wirklich löschen?' }%>
         <% end %>
         </td>
         <td>
