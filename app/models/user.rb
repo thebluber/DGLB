@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :name, :role
   validates :name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
 
   before_save :default_values
   def default_values
