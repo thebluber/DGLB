@@ -16,4 +16,12 @@ class User < ActiveRecord::Base
   def default_values
     self.role ||= "editor"
   end
+
+  def admin?
+    role == "admin"
+  end
+
+  def editor?
+    role == "editor"
+  end
 end
