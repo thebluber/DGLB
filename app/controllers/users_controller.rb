@@ -75,10 +75,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_path, notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'Mitarbeiter erfolgreich erstellt!' }
         format.json { render json: @user, role: :created, location: @user }
       else
-        format.html { redirect_to root_path, notice: 'User was not created.' }
+        format.html { redirect_to new_user_path, notice: @user.errors.messages.values.flatten.uniq.join("<br/>") }
         format.json { render json: @user.errors, role: :unprocessable_entity }
       end
     end
