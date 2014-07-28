@@ -22,6 +22,7 @@ DGLB::Application.routes.draw do
   resources :entry_docs
   resources :entry_htmls
   match "tutorial" => "tutorial#index", :via => :get
+  match "hundredlemma" => "home#hundredlemma", :via => :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

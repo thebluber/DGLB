@@ -181,3 +181,6 @@ hr {
 .sidebar-nav-fixed {
   position:fixed;
 }
+.navbar-container {
+  width: 90% !important
+}
