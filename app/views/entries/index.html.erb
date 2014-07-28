@@ -24,7 +24,7 @@
       <strong><%= raw(flash[:notice]) %></strong>
     </div>
   <% end %>
-  <h1>Listing entries</h1>
+  <h1>Alle Einträge</h1>
 
   <%= paginate @entries %>
   <table class="table table-striped">
@@ -32,8 +32,6 @@
       <th>Verfasser</th>
       <th>Namenskürzel</th>
       <th>Kennzahl</th>
-      <th>Datei</th>
-      <th>Spaltenzahl</th>
       <th>Japanische umschrift</th>
       <th>Kanji</th>
       <th>Aktionen</th>
@@ -45,16 +43,16 @@
         <td><%= entry.user.name %></td>
         <td><%= entry.namenskuerzel %></td>
         <td><%= entry.kennzahl %></td>
-        <td><%= entry.page_reference %></td>
-        <td><%= entry.spaltenzahl %></td>
         <td><%= entry.japanische_umschrift %></td>
         <td><%= entry.kanji %></td>
-        <td><%= link_to 'Show', entry %>
-        <% if entry.user == current_user || current_user.role == 'admin' %>
-          <%= link_to 'Edit', edit_entry_path(entry) %>
+        <td><%= link_to 'Anzeigen', entry %>
+        <% if entry.user == current_user || current_user.admin? %>
+          <br/>
+          <%= link_to 'Bearbeiten', edit_entry_path(entry) %>
         <% end %>
-        <% if current_user.role == 'admin' %>
-          <%= link_to 'Destroy', entry, method: :delete %>
+        <% if current_user.admin? %>
+          <br/>
+          <%= link_to 'Löschen', entry, method: :delete %>
         <% end %>
         </td>
         <td>

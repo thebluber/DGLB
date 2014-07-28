@@ -89,12 +89,12 @@
     <dd><%= raw(@entry.literatur_ergaenzungen) %></dd>
   </dl> 
   <% if @entry.user == current_user %>
-    <%= link_to 'Edit', edit_entry_path(@entry) %> |
+    <%= link_to 'Bearbeiten', edit_entry_path(@entry) %> |
   <% end %>
-  <%= link_to 'Back', entries_path %>
+  <%= link_to 'Zurück', entries_path %>
   <a name="comments"></a>
   <div class="span9">
-    <h1>Comments</h1>
+    <h1>Kommentare</h1>
     <% if flash[:notice] && flash[:notice][0..6] == "Comment" %> 
       <div class="alert alert-notice">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -111,10 +111,10 @@
           <br />
           <%= comment.updated_at.to_s %>
         </div>
-        <% if comment.user == current_user || current_user.role == "admin" %>
+        <% if comment.user == current_user || current_user.admin? %>
           <div class="action">
-            <%= link_to "Delete", comment_path(comment), method: :delete %>
-            <%= link_to "Edit", edit_comment_path(comment) %>
+            <%= link_to "Löschen", comment_path(comment), method: :delete %>
+            <%= link_to "Bearbeiten", edit_comment_path(comment) %>
           </div>
         <% end %>
         <hr>

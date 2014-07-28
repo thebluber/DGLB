@@ -1,12 +1,11 @@
 <% content_for :content do %>
-  <h1>Listing users</h1>
+  <h1>Alle Mitarbeiter</h1>
 
-  <table>
+  <table class="table">
     <tr>
       <th>Name</th>
       <th>Email</th>
       <th>Status</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -15,9 +14,9 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.role %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= user.role.capitalize %></td>
+        <td><%= link_to 'Anzeigen', user %>
+         | <%= link_to 'Löschen', user, method: :delete, data: { confirm: 'Wollen Sie diesen Mitarbeiter wirklich löschen?' } %></td>
       </tr>
     <% end %>
   </table>

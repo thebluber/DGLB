@@ -1,3 +1,4 @@
+#encoding: utf-8
 class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
@@ -37,8 +38,8 @@ class EntriesController < ApplicationController
         format.html # new.html.erb
         format.json { render json: @entry }
       end
-    else 
-      flash[:notice] = 'You are not allowed to create new entries!'
+    else
+      flash[:notice] = 'Sie dürfen keine neuen Einträge erstellen.'
       redirect_to :action => 'index'
     end
   end
@@ -47,8 +48,8 @@ class EntriesController < ApplicationController
   def edit
     @entry = Entry.find(params[:id])
     if @entry.user != current_user && current_user.role != "admin"
-      flash[:notice] = "You are not allowed to edit entries of someone else. Write a comment instead."
-      redirect_to :action => 'show' 
+      flash[:notice] = "Sie dürfen die Einträge von anderen Mitarbeitern nicht bearbeiten. Hinterlassen Sie stattdessen einen Kommentar."
+      redirect_to :action => 'show'
     end
   end
 
@@ -62,7 +63,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to @entry, notice: 'Entry was successfully created.' }
+        format.html { redirect_to @entry, notice: 'Eintrag erfolgreich erstellt.' }
         format.json { render json: @entry, status: :created, location: @entry }
       else
         format.html { render action: "new" }
@@ -82,7 +83,7 @@ class EntriesController < ApplicationController
     
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { redirect_to @entry, notice: "Entry was successfully updated. #{undo_link}" }
+        format.html { redirect_to @entry, notice: "Eintrag erfolgreich gespeichert. #{undo_link}" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -98,13 +99,13 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to entries_url, notice: "Successfully destroyed entry. #{undo_link}" }
+      format.html { redirect_to entries_url, notice: "Eintrag erfolgreich gelöscht. #{undo_link}" }
       format.json { head :no_content }
     end
   end
 
   private
   def undo_link
-    view_context.link_to("undo", revert_version_path(@entry.versions.scoped.last), :method => :post)
+    view_context.link_to("Rückgängig", revert_version_path(@entry.versions.scoped.last), :method => :post)
   end
 end

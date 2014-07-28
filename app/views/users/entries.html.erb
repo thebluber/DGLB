@@ -23,7 +23,7 @@
       <strong><%= raw(flash[:notice]) %></strong>
     </div>
   <% end %>
-  <h1>Listing my entries</h1>
+  <h1>Meine Einträge</h1>
 
   <%= paginate @entries %>
   <table class="table table-striped">
@@ -31,8 +31,6 @@
       <th>Verfasser</th>
       <th>Namenskürzel</th>
       <th>Kennzahl</th>
-      <th>Datei</th>
-      <th>Spaltenzahl</th>
       <th>Japanische umschrift</th>
       <th>Kanji</th>
       <th>Aktionen</th>
@@ -44,16 +42,16 @@
         <td><%= entry.user.name %></td>
         <td><%= entry.namenskuerzel %></td>
         <td><%= entry.kennzahl %></td>
-        <td><%= entry.page_reference %></td>
-        <td><%= entry.spaltenzahl %></td>
         <td><%= entry.japanische_umschrift %></td>
         <td><%= entry.kanji %></td>
-        <td><%= link_to 'Show', entry %>
-        <%= link_to 'Edit', edit_entry_path(entry) %>
-        <% if current_user.role == 'admin' %>
-          <%= link_to 'Destroy', entry, method: :delete %>
+        <td><%= link_to 'Anzeigen', entry %>
+          <br/>
+          <%= link_to 'Bearbeiten', edit_entry_path(entry) %>
+        <% if current_user.admin? %>
+          <br/>
+          <%= link_to 'Löschen', entry, method: :delete %>
         <% end %>
-      </td>
+        </td>
         <td>
           <% if entry.comments.length != 0 %>
             <%= link_to entry.comments.length, entry_path(entry) + "#comments", :class => "badge badge-important comments" %>

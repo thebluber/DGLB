@@ -10,7 +10,7 @@
     </div>
   <% end %>
   <fieldset class="inputs well form-horizontal">
-    <% if current_user.role == 'admin' %>
+    <% if current_user.admin? %>
       <div class="control-group">
         <%= f.label :verfasser, :class => "control-label" %>
         <div class="controls">
@@ -186,6 +186,6 @@
     </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit("Speichern") %>
   </div>
 </fieldset>

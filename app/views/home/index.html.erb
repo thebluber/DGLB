@@ -34,7 +34,10 @@
         <td>
           <%= entry.japanische_umschrift %>
           <%= entry.kanji %>
-          <span class="right-action"><%= link_to 'Anzeigen', entry %> | <%= link_to 'Bearbeiten', edit_entry_path(entry) %>
+        <span class="right-action"><%= link_to 'Anzeigen', entry %>
+          <% if entry.user == current_user || current_user.admin? %>
+          | <%= link_to 'Bearbeiten', edit_entry_path(entry) %>
+          <% end %>
           </span>
         </td>
       </tr>
