@@ -28,33 +28,25 @@
 
   <%= paginate @entries %>
   <table class="table table-striped">
-    <tr>
-      <th>Romaji</th>
-      <th>Kanji</th>
-      <th>P.</th>
-      <th>S.</th>
-      <th>C.</th>
-      <th>T.</th>
-      <th>K.</th>
-      <th>Dt.Übers.</th>
-      <th>Übersetzung</th>
-      <th></th>
-    </tr>
 
     <% @entries.each do |entry| %>
       <tr>
-        <td><%= entry.japanische_umschrift %></td>
-        <td><%= entry.kanji %></td>
-        <td><%= entry.pali %></td>
-        <td><%= entry.sanskrit %></td>
-        <td><%= entry.chinesisch %></td>
-        <td><%= entry.tibetisch %></td>
-        <td><%= entry.koreanisch %></td>
-	<td><%= entry.deutsche_uebersetzung %></td>
-	<td><%= entry.uebersetzung ? entry.uebersetzung[0..50] + "..." : "" %></td>
-        <td><%= link_to 'Show', entry %>
+        <td>
+          <%= entry.japanische_umschrift %>
+          <%= entry.kanji %>
+          <span class="right-action"><%= link_to 'Anzeigen', entry %> | <%= link_to 'Bearbeiten', edit_entry_path(entry) %>
+          </span>
         </td>
       </tr>
+      <% if entry.uebersetzung.blank? %>
+        <tr></tr>
+      <% else %>
+        <tr>
+          <td>
+            <%= raw(entry.uebersetzung) %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </table>
   <%= paginate @entries %>
