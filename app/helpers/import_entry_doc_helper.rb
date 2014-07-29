@@ -3,6 +3,8 @@ module ImportEntryDocHelper
   def import_entry file
     log = open("error_log", "a")
     begin
+      puts file
+      puts "-------------------------------"
       html = Nokogiri::HTML(open(file))
       entry = EntryDoc.new
       fields = [ :namenskuerzel,
@@ -36,52 +38,60 @@ module ImportEntryDocHelper
       html.css("table")[0].css("tr").each_with_index do |tr, i|
         if tr.css("td")[1] && !(i == 3 || i == 15) && tr.css("td")[0].text.strip != ""
           if i == 16 #Art des Lemmas
-            entry.update_attribute(fields[i], lemma_art[tr.css("td")[1].text.strip])
+            entry[fields[i]] = lemma_art[tr.css("td")[1].text.strip]
           else
-            entry.update_attribute(fields[i], tr.css("td")[1].text.strip.gsub(/\s+/, " "))
+            entry[fields[i]] = tr.css("td")[1].text.strip.gsub(/\s+/, " ")
           end
         end
       end
 
       raise 'Kennzahl is empty: ' + file if entry.kennzahl.blank?
 
-      #Import 2. table Literatur, Quellen
-      fields = [:quellen, :literatur]
-      html.css("table")[2].css("tr").each_with_index do |tr, i|
-        if tr.css("td")[1]
-          tagged_words = fetch_meta_tags(tr.css("td")[1])
-          entry.update_attribute(fields[i], tag_entry_text(tr.css("td")[1].to_html, tagged_words))
-        end
-      end
-
-      #Import 3. table Eigene Ergaenzung
-      html.css("table")[3].css("tr").each_with_index do |tr, i|
-        if tr.css("td")[1]
-          tagged_words = fetch_meta_tags(tr.css("td")[1])
-          entry.update_attribute(:eigene_ergaenzungen, tag_entry_text(tr.css("td")[1].to_html, tagged_words))
-        end
-      end
-
-      #Import 4. table Ergaenzungen Quellen, Literatur
-      fields = [:quellen_ergaenzungen, :literatur_ergaenzungen]
-      html.css("table")[3].css("tr").each_with_index do |tr, i|
-        if tr.css("td")[1]
-          tagged_words = fetch_meta_tags(tr.css("td")[1])
-          entry.update_attribute(fields[i], tag_entry_text(tr.css("td")[1].to_html, tagged_words))
-        end
-      end
-
       #Import Uebersetzung
       translation = html.xpath("//p[preceding-sibling::table[2]]")
       tagged_words = fetch_meta_tags translation
       text = tag_entry_text(translation.to_html, tagged_words)
-      entry.update_attribute(:uebersetzung, text)
+      entry.uebersetzung = text
 
-      entry.page_reference = file[/\/.+\./].gsub("/", "").gsub(".", ".doc")
+      entry.page_reference = file[/\/.+\.html/].gsub("/", "").gsub("html", "doc")
+      puts entry.page_reference
+
+      #Import 2. table Literatur, Quellen
+      fields = [:quellen, :literatur]
+      html.css("table")[2].css("tr").each_with_index do |tr, i|
+        if tr.css("td")[1] && !tr.css("td")[1].text.strip.blank?
+          tagged_words = fetch_meta_tags(tr.css("td")[1])
+          entry[fields[i]] = tag_entry_text(tr.css("td")[1].to_html, tagged_words)
+        end
+      end
+
+
+      #Import 3. table Eigene Ergaenzung
+      if html.css("table")[3]
+        html.css("table")[3].css("tr").each_with_index do |tr, i|
+          if tr.css("td")[1] && !tr.css("td")[1].text.strip.blank?
+            tagged_words = fetch_meta_tags(tr.css("td")[1])
+            entry[:eigene_ergaenzungen] = tag_entry_text(tr.css("td")[1].to_html, tagged_words)
+          end
+        end
+      end
+
+      #Import 4. table Ergaenzungen Quellen, Literatur
+      if html.css("table")[4]
+        fields = [:quellen_ergaenzungen, :literatur_ergaenzungen]
+        fields.each_with_index do |field, i|
+          tr = html.css("table")[4].css("tr")[i]
+          if tr.css("td")[1] && !tr.css("td")[1].text.strip.blank?
+            tagged_words = fetch_meta_tags(tr.css("td")[1])
+            entry[fields[i]] = tag_entry_text(tr.css("td")[1].to_html, tagged_words)
+          end
+        end
+      end
 
       entry.save
 
     rescue Exception => e
+      puts e
       log.puts file
     end
 
@@ -114,6 +124,7 @@ module ImportEntryDocHelper
     markups.each do |markup, span|
       parsed_text = parsed_text.gsub(markup, span)
     end
+    puts parsed_text
     parsed_text
   end
 
