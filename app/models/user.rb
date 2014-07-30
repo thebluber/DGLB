@@ -27,4 +27,9 @@ class User < ActiveRecord::Base
   def editor?
     role == "editor"
   end
+
+  def search_entries(query)
+    self.entries.where("japanische_umschrift LIKE ? OR kanji LIKE ? OR namenskuerzel = ? OR kennzahl = ? OR romaji_order LIKE ?", "%#{query}%", "%#{query}%", "#{query}", "#{query}", "%#{query}%")
+  end
+
 end
