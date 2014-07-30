@@ -25,6 +25,9 @@
     </div>
   <% end %>
   <h1>Home</h1>
+  <span class="label"><%= @count %>
+    <%= @count > 1 ? "Einträge" : "Eintrag" %>
+  </span>
 
   <%= paginate @entries %>
   <table class="table table-striped">

@@ -2,7 +2,7 @@
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
       <li class="nav-header">Suche</li>
-      <%= form_tag users_entries_path, method: "get", id: "search_form" do %>
+      <%= form_tag users_entries_path, method: "get", id: "search_form", target: "_self" do %>
         <fieldset>
           <li>
             <label for="search">Suchbegriff</label>
@@ -24,6 +24,9 @@
     </div>
   <% end %>
   <h1>Meine Einträge</h1>
+  <span class="label"><%= @count %>
+    <%= @count > 1 ? "Einträge" : "Eintrag" %>
+  </span>
 
   <%= paginate @entries %>
   <table class="table table-striped">
