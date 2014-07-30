@@ -1,18 +1,13 @@
 #encoding: utf-8
 require 'spec_helper'
-describe ImportEntryDocHelper do
-  class Importer
-  end
-  before do
-    @importer = Importer.new
-    @importer.extend ImportEntryDocHelper
-  end
+describe ImportEntryDocService do
 
   it 'should import entry from file' do
     expect{
-      @importer.import_entry("spec/fixtures/m1003_03.html")
+      ImportEntryDocService.import_entry("gesamt/m1003_03.html")
     }.to change{EntryDoc.count}.by(1)
 
+    expect(EntryDoc.first.page_reference).to eql "m1003_03.doc"
     expect(EntryDoc.first.namenskuerzel).to eql "TB"
     expect(EntryDoc.first.kennzahl).to eql "1003:3"
     expect(EntryDoc.first.spaltenzahl).to eql "13"

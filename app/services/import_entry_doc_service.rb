@@ -1,12 +1,13 @@
-require "nokogiri"
-module ImportEntryDocHelper
-  def import_entry file
+class ImportEntryDocService
+  def self.import_entry file
     log = open("error_log", "a")
     begin
-      puts file
-      puts "-------------------------------"
       html = Nokogiri::HTML(open(file))
       entry = EntryDoc.new
+      entry.update_attribute(:page_reference, file[/\/.+\.html/].gsub("/", "").gsub("html", "doc"))
+
+      entry.update_attribute(:kennzahl, self.page_reference_to_kennzahl(entry.page_reference))
+
       fields = [ :namenskuerzel,
                  :kennzahl,
                  :spaltenzahl,
@@ -38,30 +39,28 @@ module ImportEntryDocHelper
       html.css("table")[0].css("tr").each_with_index do |tr, i|
         if tr.css("td")[1] && !(i == 3 || i == 15) && tr.css("td")[0].text.strip != ""
           if i == 16 #Art des Lemmas
-            entry[fields[i]] = lemma_art[tr.css("td")[1].text.strip]
+            entry.update_attribute(fields[i], lemma_art[tr.css("td")[1].text.strip])
           else
-            entry[fields[i]] = tr.css("td")[1].text.strip.gsub(/\s+/, " ")
+            entry.update_attribute(fields[i], tr.css("td")[1].text.strip.gsub(/\s+/, " "))
           end
         end
       end
 
-      raise 'Kennzahl is empty: ' + file if entry.kennzahl.blank?
+      entry.update_attribute(:kennzahl, self.fix_kennzahl(entry.kennzahl))
 
       #Import Uebersetzung
-      translation = html.xpath("//p[preceding-sibling::table[2]]")
+      translation = html.xpath("//p[preceding-sibling::table[2]] | //ol[preceding-sibling::table[2]]")
       tagged_words = fetch_meta_tags translation
-      text = tag_entry_text(translation.to_html, tagged_words)
-      entry.uebersetzung = text
+      text = self.tag_entry_text(translation.to_html, tagged_words)
+      entry.update_attribute(:uebersetzung, text)
 
-      entry.page_reference = file[/\/.+\.html/].gsub("/", "").gsub("html", "doc")
-      puts entry.page_reference
-
+      puts entry.uebersetzung
       #Import 2. table Literatur, Quellen
       fields = [:quellen, :literatur]
       html.css("table")[2].css("tr").each_with_index do |tr, i|
         if tr.css("td")[1] && !tr.css("td")[1].text.strip.blank?
-          tagged_words = fetch_meta_tags(tr.css("td")[1])
-          entry[fields[i]] = tag_entry_text(tr.css("td")[1].to_html, tagged_words)
+          tagged_words = self.fetch_meta_tags(tr.css("td")[1])
+          entry.update_attribute(fields[i], self.tag_entry_text(tr.css("td")[1].to_html, tagged_words))
         end
       end
 
@@ -70,8 +69,8 @@ module ImportEntryDocHelper
       if html.css("table")[3]
         html.css("table")[3].css("tr").each_with_index do |tr, i|
           if tr.css("td")[1] && !tr.css("td")[1].text.strip.blank?
-            tagged_words = fetch_meta_tags(tr.css("td")[1])
-            entry[:eigene_ergaenzungen] = tag_entry_text(tr.css("td")[1].to_html, tagged_words)
+            tagged_words = self.fetch_meta_tags(tr.css("td")[1])
+            entry.update_attribute(:eigene_ergaenzungen, self.tag_entry_text(tr.css("td")[1].to_html, tagged_words))
           end
         end
       end
@@ -82,8 +81,8 @@ module ImportEntryDocHelper
         fields.each_with_index do |field, i|
           tr = html.css("table")[4].css("tr")[i]
           if tr.css("td")[1] && !tr.css("td")[1].text.strip.blank?
-            tagged_words = fetch_meta_tags(tr.css("td")[1])
-            entry[fields[i]] = tag_entry_text(tr.css("td")[1].to_html, tagged_words)
+            tagged_words = self.fetch_meta_tags(tr.css("td")[1])
+            entry.update_attribute(fields[i], self.tag_entry_text(tr.css("td")[1].to_html, tagged_words))
           end
         end
       end
@@ -91,7 +90,7 @@ module ImportEntryDocHelper
       entry.save
 
     rescue Exception => e
-      puts e
+      log.puts e
       log.puts file
     end
 
@@ -100,11 +99,23 @@ module ImportEntryDocHelper
 
 
   private
+  def self.page_reference_to_kennzahl page_reference
+    kennzahl_parts = page_reference.split(/[._]/)
+    kennzahl_parts[0].gsub("m", "").to_i.to_s + ":" + kennzahl_parts[1].to_i.to_s
+  end
+
+  def self.fix_kennzahl kennzahl
+    #Fix kennzahl
+    #i.e. 0030:03 => 30:3
+    kennzahl_parts = kennzahl.split(":")
+    kennzahl_parts[0].to_i.to_s + ":" + kennzahl_parts[1].to_i.to_s
+  end
+
   # @param text: html source code text
   # There are 2 steps for adding span tags:
   # 1. Replace affected area in html source code with special markups i.e. @werktitel_original@
   # 2. Replace special markups with the correct span tag after parsing: @werktitel_original@ => <span class='werktitel_original'>...
-  def tag_entry_text text, tagged_words
+  def self.tag_entry_text text, tagged_words
     tagged_words.each do |css_class, words|
       words.each do |word|
         text = text.gsub(word, "@" + css_class + "@" + Nokogiri::HTML(word).text + "@@")
@@ -124,7 +135,6 @@ module ImportEntryDocHelper
     markups.each do |markup, span|
       parsed_text = parsed_text.gsub(markup, span)
     end
-    puts parsed_text
     parsed_text
   end
 
@@ -135,7 +145,7 @@ module ImportEntryDocHelper
   #   "werktitel_original": ["<font attr=...>titel</font>", ...]
   #   ...
   # }
-  def fetch_meta_tags html
+  def self.fetch_meta_tags html
     colors = { "#800080" => "werktitel_fremdspr", #lila - fremdspr
                "#0000ff" => "fachtermini", #blau - fachterminus
                "#ff0000" => "eigennamen", #rot - eigennamen
