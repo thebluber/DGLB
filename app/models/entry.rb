@@ -10,7 +10,7 @@ class Entry < ActiveRecord::Base
   before_save :cleanup
 
   def self.search(query)
-    Entry.where("japanische_umschrift LIKE ? OR kanji LIKE ? OR namenskuerzel = ? OR kennzahl = ?", "%#{query}%", "%#{query}%", "#{query}", "#{query}")
+    Entry.where("japanische_umschrift LIKE ? OR kanji LIKE ? OR namenskuerzel = ? OR kennzahl = ? OR romaji_order LIKE ?", "%#{query}%", "%#{query}%", "#{query}", "#{query}", "%#{query}%")
   end
   
   def cleanup
@@ -19,6 +19,5 @@ class Entry < ActiveRecord::Base
       self.romaji_order = substituter.substitute(self.japanische_umschrift).downcase
     end
   end
-
 
 end
