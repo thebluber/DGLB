@@ -1,3 +1,4 @@
+#encoding: utf-8
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
   # GET /comments
@@ -46,7 +47,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to entry_path(@comment.entry) + "#comments", notice: 'Comment was successfully created.' }
+        format.html { redirect_to entry_path(@comment.entry) + "#comments", notice: 'Kommentar erfolgreich erstellt.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
@@ -62,7 +63,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to entry_path(@comment.entry) + "#comments", notice: 'Comment was successfully updated.' }
+        format.html { redirect_to entry_path(@comment.entry) + "#comments", notice: 'Kommentar erfolgreich bearbeitet.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,7 +80,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to @entry, notice: 'Comment was successfully deleted.'}
+      format.html { redirect_to @entry, notice: 'Kommentar erfolgreich gelöscht.'}
       format.json { head :no_content }
     end
   end
