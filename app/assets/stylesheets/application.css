@@ -184,3 +184,7 @@ hr {
 .navbar-container {
   width: 90% !important;
 }
+.tutorial_img {
+  border: 3px solid grey;
+  margin-bottom: 10px;
+}

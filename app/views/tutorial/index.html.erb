@@ -1,3 +1,67 @@
 <% content_for :content do %>
-  <h1>TUTORIAL</h1>
+
+  <h1>Tutorial</h1>
+  <h2>Hinweis</h2>
+  <p>Unter Umständen enthalten die Screenshots Menüpunkte oder Aktionen, die Sie nicht sehen können. Diese sind nur in der Administrator-Oberfläche sichtbar und können auch nur von diesem ausgeführt werden. Für alle in diesem Tutorial besprochenen Funktionen sind sie jedoch auch nicht relevant.</p>
+  <h2>Struktur und grundlegende Funktionen</h2>
+  <p>Nach der Anmeldung findet man sich auf der Startseite wieder, auf der alle Einträge in aufsteigender alphabetischer Reihenfolge der japanischen Umschrift aufgelistet sind (25 Einträge pro Seite).</p>
+  <img class="tutorial_img" src="images/screenshot_01.png" />
+  <p>
+  In dieser Ansicht sieht man die japanische Umschrift, die Kanji des Eintrags sowie den Inhalt des Übersetzungsfeldes, der zugleich einen ersten Einblick in den Bearbeitungsstatus des Eintrags liefert. Ziel dieser Ansicht ist es nicht unbedingt, in ihr zu arbeiten, sondern eher sich die Ergebnisse anzuschauen. 
+  </p><p>
+  Um alle Felder eines Eintrags zu sehen, wenn man die „Ansehen“-Aktion des jeweiligen Eintrags auswählt. Um einen Eintrag zu bearbeiten, ist die „<a href="#eintrag_bearbeiten">Bearbeiten</a>“-Aktion zu wählen. Diese wird nur für diejenigen Einträge angezeigt, für die man freigeschaltet wurde.
+  </p><p>
+  Eine für die Bearbeitung optimierte Ansicht der Auflistung aller Einträge erhält man unter „Einträge -> Alle Einträge“.
+  </p>
+  <img class="tutorial_img" src="images/screenshot_02.png" />
+  <p>
+  Hier lassen sich ebenfalls alle Einträge in aufsteigender alphabetischer Reihenfolge der japanischen Umschrift finden, jedoch ist die Auswahl der Spalten wesentlich mehr auf einen Bearbeitungszweck der Daten zugeschnitten.
+  </p><p>
+  Auch hier lässt sich ein vollständiger Datensatz über die „Anzeigen“-Aktion aufrufen.
+  </p><p>
+  Grundsätzlich lassen sich alle Datensätze in den Übersichten – der auf der Startseite sowie den unter „Alle Einträge“ und „Meine Einträge“ –  durchsuchen.
+  </p>
+  <img class="tutorial_img" src="images/screenshot_03.png" />
+  <p>
+  Durchsucht werden können die Datensätze nach der japanischen Umschrift (Romaji) bzw. nach Wortteilen von dieser. Groß- und Kleinschreibung muss hierbei nicht beachtet werden. Auch Makrons und Zirkumflexe müssen nicht beachtet werden (z. B. lässt sich der Eintrag „bukkyō“ durch „bukkyō“, „bukkyô“ oder „bukkyo“ finden).
+  </p><p>
+  Des Weiteren lässt sich nach Kanji und Namenskürzel suchen.
+  </p><p>
+  Achtung: Die Suche in der Ansicht „Meine Einträge“ liefert ausschließlich Einträge, die dem Suchenden bereits zugewiesen sind!</p>
+  <h2 id="eintrag_bearbeiten">Eintrag bearbeiten</h2>
+  <p>
+  Zur Bearbeitung muss eine Übersetzerin bzw. ein Übersetzer freigeschaltet werden. Eine Bearbeitung ist nur durch eine Person vorgesehen. Nur Administratoren können auch andere Einträge bearbeiten, sollten das aber eher in Ausnahmefällen tun.
+  </p><p>
+  Auch Übersetzerinnen bzw. Übersetzer, die früher ein Lemma übernommen haben, können ihre Einträge zur Zeit noch nicht bearbeiten, sondern nur mit Anmerkungen versehen.
+  </p><p>
+  Eine Liste der eigenen Einträge befindet sich unter „Einträge -> Meine Einträge“ im Menü der Kopfzeile.
+  </p><img class="tutorial_img" src="images/screenshot_04.png" /><p>
+  Alternativ gelangt man auch zu einem Eintrag, indem man nach ihm in der Suchleiste sucht.
+  </p><p>
+  Um einen Eintrag zu bearbeiten, muss die Aktion „Bearbeiten“ gewählt werden.
+  </p><img class="tutorial_img" src="images/screenshot_05.png" /><p>
+  In der nun geöffneten Eingabemaske lassen sich die einzelnen Spalten des Eintrags in separaten Texteingabefeldern und Dropdown-Listen bearbeiten.
+  </p><img class="tutorial_img" src="images/screenshot_06.png" /><p>
+  Ein Eintrag kann nur einen Verfasser haben. Dies ist derjenige, dem der Eintrag gehört und der ihn bearbeiten kann. Sollten es mehrere geistige Urheber eines Eintrags geben, können diese im Feld „Namenskürzel“ eingetragen werden. Im Normalfall wird aber auch hier nur das eigene Kürzel angegeben.
+  </p><p>
+  Eine Besonderheit stellen die Editoren für die Felder „Übersetzung/Haupttext“, „Quellen SBDJ“, „Literatur SBDJ“, „Eigene Ergänzungen“, „Quellen Ergänzungen“ und „Literatur Ergänzungen“.
+  </p><img class="tutorial_img" src="images/screenshot_07.png" /><p>
+  Hier lassen sich Textabschnitte per Maus markieren und mit entsprechenden Metadaten („Fachtermini“, „Werktitel original“, „Werktitel fremdsprachlich“, „Sonstiges“, „Eigennamen“, „Fragliche Stellen“) versehen.
+  </p><p>
+  In gleicher Weise können die Metadaten auch wieder entfernt werden.
+  </p><img class="tutorial_img" src="images/screenshot_08.png" /><p>
+  <strong>Achtung</strong>: Alle Änderungen in einem Eintrag werden erst nach Abschicken des Formulars, nach dem Klick auf den Knopf „Speichern“ unterhalb des Eintrags, übernommen!
+  </p><img class="tutorial_img" src="images/screenshot_09.png" /><p>
+  Während der Bearbeitung eines Eintrag stehen alle Scans der Originalseiten des Eintrags zur Verfügung. Sie erreicht man unterhalb der Suche im linken Menü. Die Scans öffnen sich in einer neuen Registerkarte im Browser.
+  </p><p>
+  Des Weiteren kann man auf ältere Versionen einer Eintragsbearbeitung zugreifen (der Erstellung dieser Datenbank lagen unterschiedliche Dokumente einzelner Lemmas zugrunde – meist Word- und/oder Html-Dateien). Diese sind unterhalb der Originalseiten verlinkt. Hier lassen sich die unterschiedlichen Dokumente in einem neuen Tab öffnen.
+  </p><p>
+  Diese Dokumente lassen sich nicht bearbeiten. Sie haben lediglich den Zweck, Daten aus ihnen in den Eintragsdatensatz per Hand einfach kopieren zu können.
+  </p>
+  <h2>Eintrag kommentieren</h2>
+  <p>
+  In der Eintragsübersicht wird angezeigt, welche Einträge wie häufig kommentiert wurden. Kommentiert werden können alle Einträge, nicht nur die eigenen. So kann man inhaltliche Anmerkungen und Anregungen zu Einträgen anderer Verfasser hinterlassen, ohne dass der Datensatz selbst verändert wird.
+  </p><img class="tutorial_img" src="images/screenshot_10.png" /><p>
+  Um einen Eintrag zu kommentieren, muss dieser mit der „Anzeigen“-Aktion angesehen werden. Am unteren Ende des Eintrags (unter bisherigen Kommentaren) befindet sich ein Textfeld für den Kommentar. Mit dem Knopf „Abschicken“ wird der Kommentar abgeschickt.
+  </p>
 <% end %>
