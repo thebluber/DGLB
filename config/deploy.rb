@@ -56,8 +56,8 @@ namespace :db_setup do
     run "chmod -R 1777 #{deploy_to}/#{shared_dir}/SBDJ-Original-JPGs/"
     run "mkdir -p #{deploy_to}/#{shared_dir}/docs/"
     run "chmod -R 1777 #{deploy_to}/#{shared_dir}/docs/"
-    run "mkdir -p #{deploy_to}/#{shared_dir}/htmls/"
-    run "chmod -R 1777 #{deploy_to}/#{shared_dir}/htmls/"
+    run "mkdir -p #{deploy_to}/#{shared_dir}/htms/"
+    run "chmod -R 1777 #{deploy_to}/#{shared_dir}/htms/"
   end
 
   task :link_shared do
@@ -67,7 +67,7 @@ namespace :db_setup do
     run "ln -nfs #{shared_path}/pdf #{release_path}/public/pdf"
     run "ln -nfs #{shared_path}/SBDJ-Original-JPGs #{release_path}/public/SBDJ-Original-JPGs"
     run "ln -nfs #{shared_path}/docs #{release_path}/public/docs"
-    run "ln -nfs #{shared_path}/htmls #{release_path}/public/htmls"
+    run "ln -nfs #{shared_path}/htms #{release_path}/public/htms"
     run "rm -rf #{release_path}/index"
     run "ln -nfs #{shared_path}/index #{release_path}/index"
     run "ln -nfs #{shared_path}/newrelic.yml #{release_path}/newrelic.yml"
