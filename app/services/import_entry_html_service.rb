@@ -10,7 +10,7 @@ class ImportEntryHtmlService
       kennzahl += "a" if kennzahl_parts[1].include? "a"
       entry.update_attribute(:kennzahl, kennzahl)
 
-      text = open(file).read
+      text = Nokogiri::HTML(open(file)).text.strip
       entry.update_attribute(:uebersetzung, text)
     rescue Exception => e
       log.puts e
